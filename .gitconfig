@@ -1,0 +1,27 @@
+[user]
+    email = terrynsun@gmail.com
+    name = Terry Sun
+[core]
+    autocrlf = input
+    whitespace=fix,trailing-space,cr-at-eol
+[color]
+    ui = always
+
+[url "git@github.com:"]
+    insteadOf = gh:
+[url "git@bitbucket.org:"]
+    insteadOf = bb:
+
+[branch]
+    autosetuprebase = remote
+[push]
+    default = upstream
+
+[diff]
+    tool = vimdiff
+[merge]
+    tool = kdiff3
+
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    unstage = reset HEAD --

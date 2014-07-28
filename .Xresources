@@ -1,0 +1,38 @@
+URxvt.perl-ext-common:   font-size
+
+URxvt*scrollBar: false
+
+! Define fonts
+URxvt*font: xft:DejaVu Sans Mono:size=7.5
+URxvt*boldFont:xft:DejaVu Sans Mono:style=Bold:size=7.5
+URxvt*italicFont:xft:DejaVu Sans Mono:style=Oblique:size=7.5
+URxvt*boldItalicFont:xft:DejaVu Sans Mono:style=Bold Oblique:size=7.5
+
+! colored man pages
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
+
+URxvt.insecure:     true
+URxvt*colorUL: #c5f779
+URxvt*underlineColor: #c5f779
+
+! Jellybeans
+URxvt*color0: #393939
+URxvt*color1: #ca674a
+URxvt*color2: #96a967
+URxvt*color3: #d3a94a
+URxvt*color4: #5778c1
+URxvt*color5: #9c35ac
+URxvt*color6: #6eb5f3
+URxvt*color7: #a9a9a9
+URxvt*color8: #535551
+URxvt*color9: #ea2828
+URxvt*color10: #87dd32
+URxvt*color11: #f7e44d
+URxvt*color12: #6f9bca
+URxvt*color13: #a97ca4
+URxvt*color14: #32dddd
+URxvt*color15: #e9e9e7
+URxvt*background: #121212
+URxvt*foreground: #999999

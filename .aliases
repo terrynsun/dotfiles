@@ -1,0 +1,40 @@
+# Swap keybaord layouts
+alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap' 
+alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap' 
+
+# Easy untarring
+alias tarbz='tar -jxvf'
+alias targz='tar -zxvf'
+
+# Make sure to check Arch news
+alias pacman='pacmatic'
+
+# Quick access to python2
+alias py='python2'
+
+# Quick mute
+alias mute='amixer set Master mute'
+
+# In case I ever do this emacs thing again
+alias emacs='emacs -nw' # no-window option
+alias vime='emacs -nw'  # vim-emacs-evilmode
+alias vi='vim'          # stop accidentally typing vi
+
+# Force cp, mv to check before overwriting.
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Always want colord ls
+alias ls='ls --color=auto'
+
+# WQHS radio show
+alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
+
+# xrandr screen stuff
+alias xleft='xrandr --output VGA1 --auto --left-of LVDS1'
+alias xoff='xrandr --output VGA1 --off'
+
+# vim vundle install
+alias vundle='vim +BundleInstall +qall'
+
+alias st='git status'

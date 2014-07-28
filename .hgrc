@@ -1,0 +1,40 @@
+[ui]
+username = Terry Sun <terrynsun@gmail.com>
+verbose = True
+
+[defaults]
+log = --git --follow
+diff = --git
+rebase = --keepbranches
+
+[alias]
+lg = log --graph --template '\033[91m{rev} {node|short} {fill(phase,"3")|firstline}\033[0m \033[33m{branch} {join(tags, ", ")}\033[0m\033[32m({date|age})\033[0m \033[94;1m<{author|person}>\033[0m  \033[36mfiles: {diffstat} lines\033[0m\n {desc|fill76|firstline}\n'
+
+[extensions]
+hgext.extdiff =
+color =
+pager =
+shelve =
+rebase =
+crecord =
+extdiff =
+graphlog =
+histedit =
+progress =
+
+[color]
+# Prettify `hg status` output.
+status.modified = magenta bold
+status.added = green bold
+status.removed = red bold
+status.deleted = cyan bold
+status.unknown = blue bold
+status.ignored = black bold
+
+[extdiff]
+cmd.cwdiff = cwdiff
+opts.cwdiff = --diff --ab
+
+[pager]
+pager = LESS='FRX' less -RF
+attend = annotate, cat, diff, export, glog, log, gdiff, lg, help

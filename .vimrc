@@ -7,49 +7,55 @@ set shell=/bin/bash
 call vundle#begin()
 Plugin 'gmarik/vundle'
 
+" Navigation
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'mbbill/undotree'
-Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+" Plugin 'wincent/Command-T'
+" let g:airline_powerline_fonts   = 1
+let g:airline_enable_branch     = 1
+let g:airline_enable_syntastic  = 1
+let g:airline#extensions#tabline#enabled = 1
+
+Plugin 'mbbill/undotree'
+let g:undotree_HighlightChangedText = 0
+
+" DVCS
 Plugin 'mhinz/vim-signify'
 
-" Plugin 'vim-scripts/DfrankUtil'
-" Plugin 'vim-scripts/vimprj'
+" Vimprj
+Plugin 'vim-scripts/DfrankUtil'
+Plugin 'vim-scripts/vimprj'
 
+" Misc. utilities
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'junegunn/vim-easy-align'
 
+Plugin 'Valloric/YouCompleteMe'
+
 " Syntax-ish things
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-
-" Plugin 'digitaltoad/vim-jade'
-Plugin 'pangloss/vim-javascript'
-" Plugin 'eagletmt/ghc-mod'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'wting/rust.vim'
 
-call vundle#end()
-filetype plugin indent on
-
-" Plugin settings
-
-let g:undotree_HighlightChangedText = 0
 let g:syntastic_cpp_include_dirs = ["/usr/include/qt4/QtGui"]
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:ycm_confirm_extra_conf = 0
 
+Plugin 'digitaltoad/vim-jade'
+Plugin 'pangloss/vim-javascript'
+Plugin 'eagletmt/ghc-mod'
+Plugin 'wting/rust.vim'
+
+call vundle#end()
+filetype plugin indent on
+
 set lazyredraw
 set laststatus=2
-let g:airline_theme             = 'powerlineish'
-" let g:airline_powerline_fonts   = 1
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
-let g:airline#extensions#tabline#enabled = 1
 
 """"""""""""""""""""""""""""" General Vim Settings """""""""""""""""""""""""""""
 
@@ -126,9 +132,8 @@ map <F5> :!reset<CR><CR>
 " put selection in math mode for latex
 xmap m S$
 
-" easy tabbing TODO
-inoremap <C-Tab> <Esc>>>i
-imap <C-S-Tab> <Esc>>>i
+" Y to yank to end of line
+nnoremap Y y$
 
 """"""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
 command W w|copen|make

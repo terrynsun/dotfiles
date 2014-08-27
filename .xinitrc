@@ -31,5 +31,6 @@ feh --bg-scale ~/dotfiles/background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
 pavucontrol &
+keepass &
 
 exec i3

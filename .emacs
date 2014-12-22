@@ -1,5 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+(setq package-enable-at-startup nil)
+(package-initialize)
+
 ;; Org-mode: enable tab
 (setq evil-want-C-i-jump nil)
 
@@ -7,11 +10,16 @@
 (require 'evil)
 (evil-mode 1)
 
+(setq auto-indent-start-org-mode t)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
+(require 'evil-org)
+
 ;; Color scheme
-(require 'color-theme)
+(add-to-list 'load-path "~/.emacs.d/themes/")
 (require 'color-theme-jellybeans)
 (setq color-theme-is-global t)
-(color-theme-jellybeans)
+;; (load-theme 'color-theme-jellybeans t)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -20,6 +28,20 @@
 
 ;; Leave all backups in ~/.saves
 (setq backup-directory-alist `(("." . "~/.saves")))
+
+(setq-default indent-tabs-mode nil
+              tab-width 4
+              c-basic-offset 4
+              mode-require-final-newline t
+              require-final-newline t
+              show-trailing-whitespace t
+              )
+(setq indent-line-function 'insert-tab)
+
+; Enable mouse mode
+(xterm-mouse-mode 1)
+; Mouse wheel scroll step = 1
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 
 ;; Org-mode Day Planner Settings
 ;; http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/
@@ -106,6 +128,3 @@
     (define-key org-agenda-mode-map "j" 'evil-next-line)
     (define-key org-agenda-mode-map "k" 'evil-previous-line)
     ))
-
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium-browser")

@@ -7,17 +7,17 @@ set shell=/bin/bash
 call vundle#begin()
 Plugin 'gmarik/vundle'
 
-" Navigation
+" Navigation/Display
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-bufferline'
-Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
-" Plugin 'wincent/Command-T'
-" let g:airline_powerline_fonts   = 1
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
-let g:airline#extensions#tabline#enabled = 1
+Plugin 'bling/vim-bufferline'
+Plugin 'itchyny/lightline.vim'
+let g:lightline = { 'colorscheme': 'jellybeans' }
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|bin)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
 Plugin 'mbbill/undotree'
 let g:undotree_HighlightChangedText = 0
@@ -35,7 +35,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'junegunn/vim-easy-align'
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Syntax-ish things
 Plugin 'scrooloose/syntastic'
@@ -50,6 +50,9 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'pangloss/vim-javascript'
 Plugin 'eagletmt/ghc-mod'
 Plugin 'wting/rust.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'tpope/vim-markdown'
+" Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -106,7 +109,6 @@ set t_ZR=\[23m
 """""""""""""""""""""""""""""" Filetype Settings """""""""""""""""""""""""""""""
 
 syntax enable
-colorscheme jellybeans
 
 autocmd Filetype html       setlocal ts=4 sw=4 sts=4
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
@@ -121,7 +123,7 @@ nnoremap <space> :noh<cr>
 nnoremap <CR> o<ESC>k
 
 map <F1> :W<CR>
-map <F2> :set paste<CR>
+map <F2> :set paste!<CR>
 map <F3> :UndotreeToggle<CR>
 map <F4> :NERDTreeToggle<CR>
 vmap <Enter> <Plug>(EasyAlign)
@@ -134,6 +136,9 @@ xmap m S$
 
 " Y to yank to end of line
 nnoremap Y y$
+
+" map j gj
+" map k gk
 
 """"""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
 command W w|copen|make

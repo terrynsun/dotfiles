@@ -126,11 +126,9 @@ bindsym $mod+Shift+s exec systemctl suspend
 bindsym $mod+Shift+p exec i3lock
 
 # mixer volume keys
-bindsym $mod+F1     exec amixer -q set Master mute
-bindsym $mod+Prior  exec amixer -q set Master 2dB- unmute
-bindsym $mod+F2     exec amixer -q set Master 2dB- unmute
-bindsym $mod+Next   exec amixer -q set Master 2dB+ unmute
-bindsym $mod+F3     exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioMuteVolume  exec amixer -q set Master mute
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 
 # quickstart nm-applet
 bindsym $mod+Ctrl+n exec nm-applet --no-startup-id

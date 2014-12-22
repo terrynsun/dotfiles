@@ -26,11 +26,18 @@ export GPG_AGENT_INFO
 export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 
+# SCIM
+export XMODIFIERS=@im=SCIM
+export GTK_IM_MODULE="scim"
+export QT_IM_MODULE="scim"
+scim -d
+
 # Programs
 feh --bg-scale ~/dotfiles/background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
 pavucontrol &
 keepass &
+amixer sset Master mute
 
 exec i3

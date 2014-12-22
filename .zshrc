@@ -28,6 +28,7 @@ promptinit
 prompt walters
 
 export EDITOR=vim
+export CC=clang
 
 # Add to path
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl

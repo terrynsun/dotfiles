@@ -6,9 +6,6 @@ alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodm
 alias tarbz='tar -jxvf'
 alias targz='tar -zxvf'
 
-# Make sure to check Arch news
-alias pacman='pacmatic'
-
 # Quick access to python2
 alias py='python2'
 
@@ -37,4 +34,12 @@ alias xoff='xrandr --output VGA1 --off'
 # vim vundle install
 alias vundle='vim +BundleInstall +qall'
 
-alias st='git status'
+alias gits='git status .'
+alias gita='git add'
+alias gitc='git commit'
+
+alias org='emacs ~/todo/todo.org'
+
+alias venv='source ./bin/activate'
+
+alias m='make'

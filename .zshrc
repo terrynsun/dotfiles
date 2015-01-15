@@ -51,5 +51,4 @@ if [[ -z $(tmux list-sessions | grep attached) ]]; then
   tmux kill-session -a
 fi
 
-# export TERM='rxvt-unicode-256color'
-export TERM='screen-256color'
+export TERM=screen-256color-bce

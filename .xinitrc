@@ -8,13 +8,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-# Set mute
-amixer set Master 0
-
 # Keymap
 if [ -f .Xmodmap ]; then
   xmodmap .Xmodmap
-nm-applet &
 fi
 
 # Start a D-Bus session
@@ -33,11 +29,14 @@ export QT_IM_MODULE="scim"
 scim -d
 
 # Programs
-feh --bg-scale ~/dotfiles/background.jpg &
+feh --bg-scale ~/dots/background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
+nm-applet &
 pavucontrol &
 keepass &
+
 amixer sset Master mute
+xrandr --dpi 110
 
 exec i3

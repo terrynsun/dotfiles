@@ -13,7 +13,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'itchyny/lightline.vim'
-let g:lightline = { 'colorscheme': 'jellybeans' }
+let g:lightline = { 'colorscheme': 'solarized' }
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|bin)$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -50,8 +50,9 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'pangloss/vim-javascript'
 Plugin 'eagletmt/ghc-mod'
 Plugin 'wting/rust.vim'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'tpope/vim-markdown'
+
+" Plugin 'nanotech/jellybeans.vim'
 " Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
@@ -101,14 +102,16 @@ set list listchars=tab:»\ ,trail:·
 set splitbelow splitright
 
 " Italics
-hi Comment cterm=italic ctermfg=blue
-set t_ZH=[3m
-set t_ZR=\[23m
+" hi Comment cterm=italic ctermfg=blue
+" set t_ZH=[3m
+" set t_ZR=\[23m
 
 
 """""""""""""""""""""""""""""" Filetype Settings """""""""""""""""""""""""""""""
 
 syntax enable
+" set background=light
+" colorscheme solarized
 
 autocmd Filetype html       setlocal ts=4 sw=4 sts=4
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
@@ -136,6 +139,9 @@ xmap m S$
 
 " Y to yank to end of line
 nnoremap Y y$
+
+" use global clipboard
+set clipboard=unnamed,unnamedplus
 
 " map j gj
 " map k gk

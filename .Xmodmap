@@ -1,7 +1,7 @@
 ! Escape -> null
 keycode  9  =
-! BackSpace -> null
-keycode 22  =
+! BackSpace -> BackSpace
+keycode 22  = BackSpace
 ! Enter -> null
 ! keycode 36  = 
 

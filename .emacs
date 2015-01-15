@@ -12,14 +12,14 @@
 
 (setq auto-indent-start-org-mode t)
 
+;; evil-org-mode supplementary bindings
+; https://github.com/edwtjo/evil-org-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
 (require 'evil-org)
 
 ;; Color scheme
-(add-to-list 'load-path "~/.emacs.d/themes/")
-(require 'color-theme-jellybeans)
-(setq color-theme-is-global t)
-;; (load-theme 'color-theme-jellybeans t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+; (load-theme 'solarized-light t)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)

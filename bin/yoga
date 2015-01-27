@@ -1,0 +1,65 @@
+#!/bin/bash
+
+function get_id {
+    echo $(xinput --list | grep $1 | grep -Eo "id=([0-9]+)" | cut -d= -f2)
+}
+
+function map_screen {
+    xinput --map-to-output $pen_id eDP1
+    xinput --map-to-output $screen_id eDP1
+}
+
+function touchscreen {
+    local verb=enable
+    if [[ $1 == "off" ]]; then
+        verb=disable
+    elif [[ $1 == "on" ]]; then
+        verb=enable
+    fi
+    xinput --$verb $screen_id
+}
+
+function external_monitor {
+    if [[ $1 == "off" ]]; then
+        xrandr --output HDMI2 --off
+    elif [[ $1 == "right" ]]; then
+        xrandr --output HDMI2 --auto --right-of eDP1
+    elif [[ $1 == "left" ]]; then
+        xrandr --output HDMI2 --auto --left-of eDP1
+    fi
+}
+
+function rotate {
+    local mtx="1 0 0 0 1 0 0 0 1"
+    if [[ $1 == "normal" ]]; then
+        mtx="1 0 0 0 1 0 0 0 1"
+    elif [[ $1 == "inverted" ]]; then
+        mtx="-1 0 1 0 -1 1 0 0 1"
+    elif [[ $1 == "right" ]]; then
+        mtx="0 1 0 -1 0 1 0 0 1"
+    elif [[ $1 == "left" ]]; then
+        mtx="0 -1 1 1 0 0 0 0 1"
+    fi
+    xrandr -o $1
+    xinput set-prop "$screen_name" "Coordinate Transformation Matrix" $mtx
+    xinput set-prop "$pen_name" "Coordinate Transformation Matrix" $mtx
+}
+
+pen_name="Wacom ISDv4 EC Pen"
+screen_name="ELAN Touchscreen"
+pen_id=$(get_id $pen_name)
+screen_id=$(get_id $screen_name)
+
+# xinput disable $(ID)
+if [[ $1 = "monitor" && $2 == "off" ]]; then
+    external_monitor $2
+    map_screen
+elif [[ $1 = "rotate" ]]; then
+    rotate $2
+elif [[ $1 = "screen" ]]; then
+    touchscreen $2
+elif [[ $1 = "setup" ]]; then
+    map_screen
+else
+    echo "invalid option."
+fi

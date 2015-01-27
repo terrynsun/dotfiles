@@ -135,8 +135,14 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86MonBrightnessDown exec xbacklight -5
 bindsym XF86MonBrightnessUp   exec xbacklight +5
 
-# change output of workspace
+# change output monitor of workspace
 bindsym $mod+m move workspace to output left
+
+# rotate screen and pen/screen inputs
+bindsym $mod+Control+Left  exec "yoga rotate left"
+bindsym $mod+Control+Right exec "yoga rotate right"
+bindsym $mod+Control+Up    exec "yoga rotate normal"
+bindsym $mod+Control+Down  exec "yoga rotate inverted"
 
 # quick change to last workspace
 workspace_auto_back_and_forth yes

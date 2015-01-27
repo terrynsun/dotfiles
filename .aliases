@@ -27,10 +27,6 @@ alias ls='ls --color=auto'
 # WQHS radio show
 alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
 
-# xrandr screen stuff
-alias xleft='xrandr --output VGA1 --auto --left-of LVDS1'
-alias xoff='xrandr --output VGA1 --off'
-
 # vim vundle install
 alias vundle='vim +BundleInstall +qall'
 

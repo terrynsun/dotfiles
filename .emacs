@@ -19,7 +19,7 @@
 
 ;; Color scheme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-; (load-theme 'solarized-light t)
+(load-theme 'solarized-light t)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)

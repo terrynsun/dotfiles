@@ -1,3 +1,5 @@
+XTerm*metaSendsEscape: true
+
 URxvt.perl-ext-common: font-size,default,matcher
 URxvt.perl-ext: default,matcher
 urxvt.perl-lib: /usr/lib/urxvt/perl/

@@ -1,31 +1,20 @@
 ! Escape -> null
-keycode  9  =
+! keycode  9  =
+!
 ! BackSpace -> BackSpace
-keycode 22  = BackSpace
+! keycode 22  = BackSpace
 ! Enter -> null
 ! keycode 36  = 
-
-! Alt_L -> BackSpace
-keycode 64  = Alt_L
 
 ! CapsLock -> Escape
 keycode 66  = Escape
 
-! PrtSc -> Alt
-keycode 107 = Alt_L
+! PrtSc, Windows -> Super
+keycode 107 = Super_R
+keycode 133 = Super_L
 
 ! Alt_R -> Return
 keycode 108 = BackSpace
-
-keycode 135 = Menu NoSymbol Menu
-keycode 136 = Cancel NoSymbol Cancel
-keycode 137 = Redo NoSymbol Redo
-keycode 139 = Undo NoSymbol Undo
-keycode 172 = emdash
-
-! keycode 111 = Up F5
-keycode 112 = Prior XF86Back
-keycode 117 = Next XF86Forward
 
 clear lock
 clear mod1

@@ -35,6 +35,8 @@ export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cabal/bin:$HOME/.gem/ruby/2.0.0/bin
 export PATH=$PATH:$HOME/bin
 
+export TERM=screen-256color
+
 # Auto-open tmux
 if [[ -z $TMUX ]] ; then
   if [[ -z $(tmux list-sessions | grep main) ]] ; then
@@ -51,4 +53,5 @@ if [[ -z $(tmux list-sessions | grep attached) ]]; then
   tmux kill-session -a
 fi
 
-export TERM=screen-256color-bce
+# OPAM configuration
+. /home/sun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

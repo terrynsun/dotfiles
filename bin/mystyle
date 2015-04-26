@@ -1,0 +1,2 @@
+#!/bin/bash
+astyle --mode=c --style=java -pcHs4j --align-pointer=name $@

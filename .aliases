@@ -34,8 +34,13 @@ alias gits='git status .'
 alias gita='git add'
 alias gitc='git commit'
 
-alias org='emacs ~/todo/todo.org'
+alias org='emacs ~/log/todo.org'
 
-alias venv='source ./bin/activate'
+alias venv='source venv/bin/activate'
 
 alias m='make'
+alias mt='make test'
+alias mc='make clean'
+
+alias ipy2='ipython2'
+alias ipy='ipython'

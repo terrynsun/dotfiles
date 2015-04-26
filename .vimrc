@@ -5,11 +5,12 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 set shell=/bin/bash
 call vundle#begin()
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " Navigation/Display
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
+Plugin 'vim-scripts/a.vim'
 
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
@@ -21,8 +22,8 @@ let g:lightline = {
 
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|bin)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|bin|build|_build)$',
+  \ 'file': '\v\.(exe|so|dll|class)$',
   \ }
 
 Plugin 'mbbill/undotree'
@@ -33,6 +34,7 @@ Plugin 'scrooloose/nerdtree'
 
 " DVCS
 Plugin 'mhinz/vim-signify'
+Plugin 'tpope/vim-fugitive'
 
 " Vimprj
 Plugin 'vim-scripts/DfrankUtil'
@@ -45,6 +47,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/vim-easy-align'
 
 """"" Syntax and Syntax-ish things
@@ -174,9 +177,9 @@ autocmd VimLeave *.tex !rm *.log *.aux
 nnoremap <space> :noh<cr>
 nnoremap <CR> o<ESC>k
 
-map <F1> :SyntasticCheck<CR>
 map <F2> :set paste!<CR>
 map <F3> :UndotreeToggle<CR>
+map <F4> :SyntasticCheck<CR>
 
 " clear terminal screen
 map <F5> :!reset<CR><CR>
@@ -199,4 +202,4 @@ set clipboard=unnamed,unnamedplus
 " map k gk
 
 """"""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
-command W w|copen|make
+command W wall|Make

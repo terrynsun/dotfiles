@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep --color=auto --exclude-dir={.git} --exclude=tags --exclude-dir=target -ri "$@" ~/src/store/*

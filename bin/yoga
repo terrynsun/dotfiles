@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_id {
-    echo $(xinput --list | grep $1 | grep -Eo "id=([0-9]+)" | cut -d= -f2)
+    echo $(xinput --list | grep "$1" | grep -Eo "id=([0-9]+)" | cut -d= -f2)
 }
 
 function map_screen {
@@ -45,13 +45,13 @@ function rotate {
     xinput set-prop "$pen_name" "Coordinate Transformation Matrix" $mtx
 }
 
-pen_name="Wacom ISDv4 EC Pen"
+pen_name="Wacom ISDv4 EC Pen stylus"
 screen_name="ELAN Touchscreen"
 pen_id=$(get_id $pen_name)
 screen_id=$(get_id $screen_name)
 
 # xinput disable $(ID)
-if [[ $1 = "monitor" && $2 == "off" ]]; then
+if [[ $1 = "monitor" && $2 ]]; then
     external_monitor $2
     map_screen
 elif [[ $1 = "rotate" ]]; then

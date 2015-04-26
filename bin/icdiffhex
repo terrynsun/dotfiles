@@ -1,0 +1,3 @@
+#!/bin/bash
+
+icdiff <(hexdump $1) <(hexdump $2)

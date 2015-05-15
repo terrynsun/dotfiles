@@ -11,6 +11,12 @@ xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Velocity Scaling' 100
 xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Constant Deceleration' 1
 xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Adaptive Deceleration' 1
 
+# Configure TrackPoint
+xinput set-prop 'Logitech M705' 'Device Accel Profile' 2
+xinput set-prop 'Logitech M705' 'Device Accel Velocity Scaling' 5
+xinput set-prop 'Logitech M705' 'Device Accel Constant Deceleration' 1
+xinput set-prop 'Logitech M705' 'Device Accel Adaptive Deceleration' 1
+
 # xset m 3/2 1
 
 # Configure TrackPad

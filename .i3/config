@@ -122,7 +122,8 @@ bar {
 }
 
 # go-to-sleep things
-bindsym $mod+Shift+s exec i3lock && systemctl suspend
+# bindsym $mod+Shift+s exec i3lock && systemctl suspend
+bindsym $mod+Shift+s exec i3lock && pm-suspend
 bindsym $mod+Shift+p exec i3lock
 
 # bind mixer volume keys

@@ -33,8 +33,6 @@ feh --bg-scale ~/dots/background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
 nm-applet &
-pavucontrol &
-keepass &
 
 amixer sset Master mute
 xrandr --dpi 110

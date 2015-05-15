@@ -61,6 +61,12 @@ if __name__ == '__main__':
 
         j = json.loads(line)
 
+        GREEN      = '#00ff00'
+        LIGHT_BLUE = '#80dfff'
+        RED        = '#ff0000'
+        ORANGE     = '#ffbb00'
+        YELLOW     = '#ffff00'
+
         for e in j:
             name = e['name']
             text = e['full_text']
@@ -69,15 +75,20 @@ if __name__ == '__main__':
                 code = str(subprocess.check_output(cmd))
                 if code[2] == '1':
                     e['full_text'] = "%s 🎧 " % text
+                    e['color'] = YELLOW
             elif name == 'cpu_usage':
                 percent = int(text[:-1])
-                e['color'] = '#00DB00' if percent < 25 else '#FF0000'
+                e['color'] = GREEN if percent < 40 else RED
             elif name == 'cpu_temperature':
-                e['color'] = '#00DB00'
+                temp = int(text[:-1])
+                e['color'] = GREEN if temp < 55 else RED
             elif name == 'battery':
                 if text.startswith('BAT'):
+                    e['full_text'] = "%s" % (text)
+                    if 'color' not in e:
+                        e['color'] = LIGHT_BLUE
+                else: # 🔌
                     e['full_text'] = "🗲 %s" % (text)
-                else:
-                    e['full_text'] = "🔌 %s" % (text)
+                    e['color'] = ORANGE
 
         print_line(prefix+json.dumps(j))

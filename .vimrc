@@ -23,7 +23,7 @@ let g:lightline = {
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|bin|build|_build)$',
-  \ 'file': '\v\.(exe|so|dll|class)$',
+  \ 'file': '\v\.(exe|so|dll|class|o)$',
   \ }
 
 Plugin 'mbbill/undotree'
@@ -203,3 +203,10 @@ set clipboard=unnamed,unnamedplus
 
 """"""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
 command W wall|Make
+
+function! WriteSmall()
+    let mtime = system("date -d @`stat -c %Y ".shellescape(expand('%:p')) . "`")
+    write
+    call system("touch --date='".mtime."' ".shellescape(expand('%:p')))
+endfunction
+map <F6> :call WriteSmall()<CR>

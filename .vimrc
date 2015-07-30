@@ -7,9 +7,8 @@ set shell=/bin/bash
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-" Navigation/Display
+""""""" Navigation
 Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'bling/vim-bufferline'
 Plugin 'vim-scripts/a.vim'
 
 Plugin 'itchyny/lightline.vim'
@@ -32,79 +31,54 @@ let g:undotree_HighlightChangedText = 0
 Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
 
-" DVCS
-Plugin 'mhinz/vim-signify'
+""""""" Display
+Plugin 'altercation/vim-colors-solarized'
+
+""""""" DVCS
+Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 
-" Vimprj
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
-
-" Misc. utilities
+""""""" Misc. utilities
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-sensible'
+runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/vim-easy-align'
 
-""""" Syntax and Syntax-ish things
-Plugin 'junegunn/rainbow_parentheses.vim'
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-let g:rainbow#colors = {
-\   'dark': [
-\     ['yellow',  'orange1'     ],
-\     ['green',   'yellow1'     ],
-\     ['cyan',    'greenyellow' ],
-\     ['magenta', 'green1'      ],
-\     ['red',     'springgreen1'],
-\     ['yellow',  'cyan1'       ],
-\     ['green',   'slateblue1'  ],
-\     ['cyan',    'magenta1'    ],
-\     ['magenta', 'purple1'     ]
-\   ],
-\   'light': [
-\     ['darkyellow',  'orangered3'    ],
-\     ['darkgreen',   'orange2'       ],
-\     ['blue',        'yellow3'       ],
-\     ['darkmagenta', 'olivedrab4'    ],
-\     ['red',         'green4'        ],
-\     ['darkyellow',  'paleturquoise3'],
-\     ['darkgreen',   'deepskyblue4'  ],
-\     ['blue',        'darkslateblue' ],
-\     ['darkmagenta', 'darkviolet'    ]
-\   ]
-\   }
-
+"""""" Syntax and Syntax-ish things
+Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
 
 let g:syntastic_cpp_compiler = 'clang'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_mode_map = {
 \   "mode": "active",
 \   "passive_filetypes": [ "scala" ]
 \   }
+let g:syntastic_always_populate_loc_list = 1
 
 " Plugin 'Valloric/YouCompleteMe'
 
-""""" Language Specific
+"""""" Language Specific
 Plugin 'pangloss/vim-javascript'
+Plugin 'wookiehangover/jshint.vim'
+let JSHintUpdateWriteOnly=1
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-markdown'
-Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-ruby/vim-ruby'
+
+"Plugin 'derekwyatt/vim-scala'
 "Plugin 'eagletmt/ghc-mod'
 "Plugin 'digitaltoad/vim-jade'
-" Ocaml-Merlin
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
-""""" Visuals
-" Plugin 'nanotech/jellybeans.vim'
-Plugin 'altercation/vim-colors-solarized'
+" Ocaml-Merlin
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:syntastic_ocaml_checkers = ['merlin']
 
 call vundle#end()
 filetype plugin indent on
@@ -138,7 +112,9 @@ set noerrorbells
 if has('mouse')
   set mouse=a
   set mousemodel=extend
-  set ttymouse=xterm2
+  if !has('nvim')
+    set ttymouse=xterm2
+  endif
 endif
 
 " Save undo tree
@@ -153,25 +129,20 @@ set list listchars=tab:»\ ,trail:·
 " Splitting on the proper side
 set splitbelow splitright
 
-" Italics
-" hi Comment cterm=italic ctermfg=blue
-" set t_ZH=[3m
-" set t_ZR=\[23m
+" Fast escape (neovim)
+if has('nvim')
+    set ttimeout
+    set ttimeoutlen=-1
+endif
 
 """""""""""""""""""""""""""""" Filetype Settings """""""""""""""""""""""""""""""
 
 syntax enable
 colorscheme solarized
 
-autocmd Filetype html       setlocal ts=4 sw=4 sts=4
-autocmd Filetype ocaml      setlocal ts=2 sw=2 sts=2
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
-autocmd Filetype jade       setlocal ts=2 sw=2 sts=2
-
 " compile .tex on save, clean directory on exit
 autocmd BufWritePost *.tex !pdflatex "<afile>"
 autocmd VimLeave *.tex !rm *.log *.aux
-" autocmd BufWinEnter * RainbowParentheses
 
 """"""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
 nnoremap <space> :noh<cr>

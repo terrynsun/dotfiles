@@ -9,8 +9,10 @@
 ! CapsLock -> Escape
 keycode 66  = Escape
 
-! PrtSc, Windows -> Super
-keycode 107 = Super_R
+! PrtSc -> Enter
+keycode 107 = Return
+
+! Windows -> Super
 keycode 133 = Super_L
 
 ! Alt_R -> Return

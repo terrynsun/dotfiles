@@ -1,6 +1,6 @@
 # Swap keybaord layouts
-alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap' 
-alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap' 
+alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
+alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap'
 
 # Easy untarring
 alias tarbz='tar -jxvf'
@@ -13,9 +13,9 @@ alias py='python2'
 alias mute='amixer set Master mute'
 
 # In case I ever do this emacs thing again
-alias emacs='emacs -nw' # no-window option
-alias vime='emacs -nw'  # vim-emacs-evilmode
-alias vi='vim'          # stop accidentally typing vi
+# alias emacs='emacs -nw' # no-window option
+# alias vime='emacs -nw'  # vim-emacs-evilmode
+# alias vi='vim'          # stop accidentally typing vi
 
 # Force cp, mv to check before overwriting.
 alias cp='cp -i'
@@ -30,7 +30,7 @@ alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
 # vim vundle install
 alias vundle='vim +BundleInstall +qall'
 
-alias gits='git status .'
+alias gits='git status'
 alias gita='git add'
 alias gitc='git commit'
 
@@ -44,3 +44,9 @@ alias mc='make clean'
 
 alias ipy2='ipython2'
 alias ipy='ipython'
+
+# Cargo
+alias cb='cargo build'
+alias cr='cargo run'
+alias ct='cargo test'
+alias c='cargo'

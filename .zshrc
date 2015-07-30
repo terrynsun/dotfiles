@@ -1,5 +1,13 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh
+
+# plugins=(git-extras tmux sudo)
+plugins=(z sudo)
+
+# Tmux plugin
+export ZSH_TMUX_AUTOSTART=true
+
+# Activate plugins
 source $ZSH/oh-my-zsh.sh
 
 if [ -f $HOME/.aliases ]; then
@@ -8,11 +16,6 @@ fi
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="false"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# plugins=(git-extras tmux sudo)
 
 # Autocompletion
 autoload -U compinit
@@ -31,13 +34,16 @@ export EDITOR=vim
 export CC=clang
 
 # Add to path
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.cabal/bin:$HOME/.gem/ruby/2.0.0/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/usr/bin/core_perl
+export PATH=$PATH:$HOME/.cabal/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
 export PATH=$PATH:$HOME/bin
 
-export TERM=screen-256color
+# export TERM=screen-256color
 
-# Auto-open tmux
+# # Auto-open tmux
 if [[ -z $TMUX ]] ; then
   if [[ -z $(tmux list-sessions | grep main) ]] ; then
     tmux new-session -s main
@@ -53,6 +59,6 @@ if [[ -z $(tmux list-sessions | grep attached) ]]; then
   tmux kill-session -a
 fi
 
-# OPAM configuration
-. /home/sun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-eval `opam config env`
+# # OPAM configuration
+# . /home/sun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# eval `opam config env`

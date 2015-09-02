@@ -19,7 +19,6 @@ font xft:sans-serif 10
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
@@ -145,7 +144,7 @@ bindsym $mod+Control+Right exec "yoga rotate right"
 bindsym $mod+Control+Up    exec "yoga rotate normal"
 bindsym $mod+Control+Down  exec "yoga rotate inverted"
 
-bindsym $mod+n  exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
+bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
 
 # quick change to last workspace
 workspace_auto_back_and_forth yes
@@ -153,3 +152,4 @@ bindsym $mod+Tab workspace back_and_forth
 
 # screenshot
 bindcode $mod+107 exec scrot -e 'mv $f ~'
+exec ~/.xrc

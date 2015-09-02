@@ -9,11 +9,9 @@ fi
 
 # Keymap
 if [ -f .Xmodmap ]; then
-  xmodmap .Xmodmap
+  xmodmap ~/.Xmodmap
 fi
 
-# Start a D-Bus session
-#source /etc/X11/xinit/xinitrc.d/30-dbus
 # Start GNOME Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
@@ -21,19 +19,16 @@ export GPG_AGENT_INFO
 export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 
-# SCIM
-export XMODIFIERS=@im=SCIM
-export GTK_IM_MODULE="scim"
-export QT_IM_MODULE="scim"
-scim -d
-
 # Programs
 feh --bg-scale ~/dots/background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
 nm-applet &
 
+pulseaudio --start
 amixer sset Master mute
 xrandr --dpi 110
+sh .xrc
 
+export PATH=$PATH:/$HOME/bin
 exec i3

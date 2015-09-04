@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh
+ZSH=$HOME/.oh-my-zsh
 
 # plugins=(git-extras tmux sudo)
 plugins=(z sudo)
@@ -39,7 +39,7 @@ export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # export TERM=screen-256color
 

@@ -127,8 +127,8 @@ bindsym $mod+Shift+p exec i3lock
 
 # bind mixer volume keys
 bindsym XF86AudioMuteVolume  exec "pamixer --toggle-mute && killall -USR1 i3status"
-bindsym XF86AudioRaiseVolume exec "~/bin/adjvolume +5 && killall -USR1 i3status"
-bindsym XF86AudioLowerVolume exec "~/bin/adjvolume -5 && killall -USR1 i3status"
+bindsym XF86AudioRaiseVolume exec "adjvolume +5 && killall -USR1 i3status"
+bindsym XF86AudioLowerVolume exec "adjvolume -5 && killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo toggle"
 
 # bind brightness keys

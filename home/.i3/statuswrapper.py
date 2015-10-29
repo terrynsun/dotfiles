@@ -62,11 +62,11 @@ if __name__ == '__main__':
 
         j = json.loads(line)
 
-        GREEN      = '#00ff00'
-        LIGHT_BLUE = '#80dfff'
-        RED        = '#ff0000'
-        ORANGE     = '#ffbb00'
-        YELLOW     = '#ffff00'
+        GREEN      = '#859900'
+        LIGHT_BLUE = '#268bd2'
+        RED        = '#dc322f'
+        ORANGE     = '#cb4b16'
+        YELLOW     = '#b58900'
 
         for e in j:
             name = e['name']

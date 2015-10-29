@@ -69,8 +69,9 @@ Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-markdown'
-Plugin 'vim-ruby/vim-ruby'
+Plugin 'beyondmarc/glsl.vim'
 
+"Plugin 'vim-ruby/vim-ruby'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'eagletmt/ghc-mod'
 "Plugin 'digitaltoad/vim-jade'
@@ -141,7 +142,12 @@ syntax enable
 colorscheme solarized
 
 " compile .tex on save, clean directory on exit
-autocmd BufWritePost *.tex !pdflatex "<afile>"
+"autocmd BufWritePost *.tex !pdflatex "<afile>"
+autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+
+autocmd VimEnter *.tex set conceallevel=0
+autocmd VimEnter *.md set conceallevel=0
+
 autocmd VimLeave *.tex !rm *.log *.aux
 
 """"""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
@@ -169,8 +175,9 @@ nnoremap Y y$
 " use global clipboard
 set clipboard=unnamed,unnamedplus
 
-" map j gj
-" map k gk
+if has('nvim')
+    nnoremap <Leader>m :rightbelow vertical split <bar> :term make<cr>
+endif
 
 """"""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
 command W wall|Make

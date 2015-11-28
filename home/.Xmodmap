@@ -10,7 +10,7 @@
 keycode 66  = Escape
 
 ! Ctrl, Super, BackSpace, [ Space ], Return, Alt, Ctrl
-keycode 36 =
+keycode 36 = Return
 
 ! PrtSc -> Alt
 keycode 107 = Alt_L
@@ -27,7 +27,9 @@ keycode 108 = Return
 !  F9 F10 F11 F12
 ! 179 225 128 152
 !
+keycode 225 = XF86AudioPrev
 keycode 128 = XF86AudioPlay
+keycode 152 = XF86AudioNext
 
 clear lock
 clear mod1

@@ -28,6 +28,19 @@ import sys
 import json
 import subprocess
 import os
+import re
+
+GREEN      = '#859900'
+LIGHT_BLUE = '#268bd2'
+RED        = '#dc322f'
+ORANGE     = '#cb4b16'
+YELLOW     = '#b58900'
+
+regex_time = re.compile("([0-9]+):([0-9]+):([0-9]+)")
+regex_battery = re.compile("([0-9]+)h")
+regex_wifi = re.compile("off")
+
+clocks = [ "🕛", "🕧", "🕐", "🕜", "🕑", "🕝", "🕒", "🕞", "🕓", "🕟", "🕔", "🕠", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕡", "🕢", "🕣", "🕤", "🕥", "🕦", ]
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
@@ -55,41 +68,57 @@ if __name__ == '__main__':
     print_line(read_line())
 
     while True:
-        line, prefix = read_line(), ''
-        # ignore comma at start of lines
-        if line.startswith(','):
-            line, prefix = line[1:], ','
+        line = read_line()
+        full_line = ''
+        while line != 'end':
+            full_line += line
+            line, prefix = read_line(), ''
 
-        j = json.loads(line)
-
-        GREEN      = '#859900'
-        LIGHT_BLUE = '#268bd2'
-        RED        = '#dc322f'
-        ORANGE     = '#cb4b16'
-        YELLOW     = '#b58900'
+        j = json.loads(full_line)
 
         for e in j:
-            name = e['name']
+            if 'name' in e:
+                name = e['name']
+            else:
+                continue
+
             text = e['full_text']
             if name == "volume":
-                cmd = "audio"
-                code = str(subprocess.check_output(cmd))
+                code = str(subprocess.check_output("audio"))
                 if code[2] == '1':
-                    e['full_text'] = "%s 🎧 " % text
+                    e['full_text'] = "%s🎧" % text
                     e['color'] = YELLOW
+            elif name == "wireless":
+                if regex_wifi.search(text):
+                    e['color'] = RED
+                else:
+                    e['color'] = GREEN
             elif name == 'cpu_usage':
                 percent = int(text[:-1])
                 e['color'] = GREEN if percent < 40 else RED
             elif name == 'cpu_temperature':
                 temp = int(text[:-1])
                 e['color'] = GREEN if temp < 55 else RED
+            elif name == 'time':
+                match_hrs = regex_time.search(text)
+                if match_hrs:
+                    h = match_hrs.group(1)
+                    h = int(h) % 12
+                    m = match_hrs.group(2)
+                    m = 1 if int(m) > 30 else 0
+                    clock = clocks[h*2 + m]
+                    e['full_text'] = "%s%s" % (clock, text)
+                sys.stderr.write(str(match_hrs.group(1)))
             elif name == 'battery':
-                if text.startswith('BAT'):
-                    e['full_text'] = "%s" % (text)
-                    if 'color' not in e:
-                        e['color'] = LIGHT_BLUE
-                else: # 🔌
-                    e['full_text'] = "🗲 %s" % (text)
+                if text.startswith('charging'):
+                    e['full_text'] = "🔌%s" % (text)
                     e['color'] = ORANGE
+                else: # 🗲
+                    e['full_text'] = "🔋%s" % (text)
+                    match_hrs = regex_battery.search(text)
+                    if match_hrs and match_hrs.group(1) == '0':
+                        e['color'] = RED
+                    else:
+                        e['color'] = LIGHT_BLUE
 
-        print_line(prefix+json.dumps(j))
+        print_line(json.dumps(j) + ',')

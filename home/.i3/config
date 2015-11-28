@@ -148,7 +148,8 @@ client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
 # finds out, if available)
 bar {
     position top
-    status_command i3status | ~/.i3/statuswrapper.py
+    #status_command i3status | ~/.i3/statuswrapper.py
+    status_command conkybar | ~/.i3/statuswrapper.py
     colors {
         # solarized
         background #073642

@@ -68,7 +68,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
 Plugin 'wting/rust.vim'
-Plugin 'tpope/vim-markdown'
+"Plugin 'tpope/vim-markdown'
+let g:markdown_fenced_languages = ['rust']
 Plugin 'beyondmarc/glsl.vim'
 
 "Plugin 'vim-ruby/vim-ruby'
@@ -136,6 +137,8 @@ if has('nvim')
     set ttimeoutlen=-1
 endif
 
+set nojoinspaces
+
 """""""""""""""""""""""""""""" Filetype Settings """""""""""""""""""""""""""""""
 
 syntax enable
@@ -147,6 +150,7 @@ autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<a
 
 autocmd VimEnter *.tex set conceallevel=0
 autocmd VimEnter *.md set conceallevel=0
+autocmd VimEnter *.json set conceallevel=0
 
 autocmd VimLeave *.tex !rm *.log *.aux
 

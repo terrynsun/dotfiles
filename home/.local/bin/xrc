@@ -1,5 +1,5 @@
 # Turn off bell
-xset -b
+xset b off
 
 # Configure TrackPoint
 xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 1

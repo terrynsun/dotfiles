@@ -93,12 +93,6 @@ if __name__ == '__main__':
                     e['color'] = RED
                 else:
                     e['color'] = GREEN
-            elif name == 'cpu_usage':
-                percent = int(text[:-1])
-                e['color'] = GREEN if percent < 40 else RED
-            elif name == 'cpu_temperature':
-                temp = int(text[:-1])
-                e['color'] = GREEN if temp < 55 else RED
             elif name == 'time':
                 match_hrs = regex_time.search(text)
                 if match_hrs:

@@ -33,13 +33,16 @@ prompt walters
 export EDITOR=vim
 export CC=clang
 
-# Add to path
+# Set path
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cabal/bin
-export PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.3.0/bin
 export PATH=$PATH:$HOME/.local/bin
+
+# Have bundler install to ~/.gem/ruby/2.2.0/bin
+export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 # export TERM=screen-256color
 

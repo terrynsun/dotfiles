@@ -34,6 +34,9 @@ conky.config = {
   top_cpu_separate = false,
 }
 
+-- red dc322f
+-- light grey 93a1a1
+
 conky.text = [[
   [
     {
@@ -47,12 +50,12 @@ conky.text = [[
     , "color": "\#ffffff"
     },
     {
-      "full_text": "/ ${fs_free /}"
-    , "color": "\#ffffff"
+      "full_text": "🌲${fs_free /}"
+    , "color": "\#fdf6e3"
     },
     {
       "full_text": "🌡${acpitemp}°C"
-    , "color": "\#ffffff"
+    , "color": ${if_match ${acpitemp}<50} "\#93a1a1" ${else} ${if_match ${acpitemp}<65} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
     },
     {
       "name": "wireless"
@@ -61,16 +64,16 @@ conky.text = [[
     },
     {
       "full_text": "📈${cpu}%"
-    , "color": "\#ffffff"
+    , "color": ${if_match ${cpu}<25}"\#93a1a1"${else}"\#dc322f"${endif}
     },
     {
-      "full_text": "RAM ${memperc}%"
-    , "color": ${if_match ${memperc}<90}"\#ffffff"${else}"\#ff0000"${endif}
+      "full_text": "🐏${memperc}%"
+    , "color": ${if_match ${memperc}<50} "\#93a1a1" ${else} ${if_match ${memperc}<75} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
     },
     {
       "name": "time"
     , "full_text": "${time %a %Y-%m-%d %r}"
-    , "color": "\#ffffff"
+    , "color": "\#fdf6e3"
     }
   ]
   end

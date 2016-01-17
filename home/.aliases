@@ -1,13 +1,25 @@
+# Force cp, mv to check before overwriting.
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Always want colord ls
+alias ls='ls --color=auto'
+
+# Cargo
+alias cb='cargo build'
+alias cr='cargo run'
+alias ct='cargo test'
+alias c='cargo'
+
+alias m='make'
+alias mt='make test'
+alias mc='make clean'
+
+# alias vim='nvim'
+
 # Swap keybaord layouts
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
 alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap'
-
-# Easy untarring
-alias tarbz='tar -jxvf'
-alias targz='tar -zxvf'
-
-# Quick access to python2
-alias py='python2'
 
 # Quick mute
 alias mute='amixer set Master mute'
@@ -17,19 +29,13 @@ alias mute='amixer set Master mute'
 # alias vime='emacs -nw'  # vim-emacs-evilmode
 # alias vi='vim'          # stop accidentally typing vi
 
-# Force cp, mv to check before overwriting.
-alias cp='cp -i'
-alias mv='mv -i'
-
-# Always want colord ls
-alias ls='ls --color=auto'
-
 # WQHS radio show
 alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
 
 # vim vundle install
 alias vundle='vim +BundleInstall +qall'
 
+alias g='git'
 alias gits='git status'
 alias gita='git add'
 alias gitc='git commit'
@@ -38,17 +44,4 @@ alias org='emacs ~/log/todo.org'
 
 alias venv='source venv/bin/activate'
 
-alias m='make'
-alias mt='make test'
-alias mc='make clean'
-
 alias ym='yoga monitor'
-
-alias ipy2='ipython2'
-alias ipy='ipython'
-
-# Cargo
-alias cb='cargo build'
-alias cr='cargo run'
-alias ct='cargo test'
-alias c='cargo'

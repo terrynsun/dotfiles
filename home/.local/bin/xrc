@@ -1,33 +1,8 @@
 # Turn off bell
 xset b off
 
-# Configure TrackPoint
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 1
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 2
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Timeout' 200
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Axes' 6 7 4 5
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Profile' 2
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Velocity Scaling' 100
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Constant Deceleration' 1
-xinput set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Adaptive Deceleration' 1
+# Trackpad
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Click Method Enabled" 0 1
 
-# Configure TrackPoint
-xinput set-prop 'Logitech M705' 'Device Accel Profile' 2
-xinput set-prop 'Logitech M705' 'Device Accel Velocity Scaling' 5
-xinput set-prop 'Logitech M705' 'Device Accel Constant Deceleration' 1
-xinput set-prop 'Logitech M705' 'Device Accel Adaptive Deceleration' 1
-
-# xset m 3/2 1
-
-# Configure TrackPad
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Tap Action' 0 0 0 0 0 0 0
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Two-Finger Scrolling' 1 1
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Circular Scrolling' 1
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Circular Scrolling Trigger' 3
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Move Speed' 0 0 0 0
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Finger' 10 10 0
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Edge Scrolling' 0 0 0
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Accel Profile' 2
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Accel Velocity Scaling' 2
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Accel Constant Deceleration' 3
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Accel Adaptive Deceleration' 1
+# TrackPoint
+xinput set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1

@@ -73,6 +73,9 @@ Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
 Plugin 'beyondmarc/glsl.vim'
 
+Plugin 'def-lkb/vimbufsync'
+Plugin 'the-lambda-church/coquille'
+
 "Plugin 'vim-ruby/vim-ruby'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'eagletmt/ghc-mod'
@@ -154,6 +157,16 @@ autocmd VimEnter *.md set conceallevel=0
 autocmd VimEnter *.json set conceallevel=0
 
 autocmd VimLeave *.tex !rm *.log *.aux
+
+autocmd VimEnter *.v CoqLaunch
+au FileType coq hi CheckedByCoq ctermbg=189
+au FileType coq hi SentToCoq ctermbg=188
+au FileType coq nnoremap <C-j> :CoqNext<CR>
+au FileType coq nnoremap <C-k> :CoqUndo<CR>
+au FileType coq inoremap <C-j> <C-o>:CoqNext<CR>
+au FileType coq inoremap <C-k> <C-o>:CoqUndo<CR>
+au FileType coq nnoremap cq :CoqToCursor<CR>
+au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
 
 """"""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
 nnoremap <space> :noh<cr>

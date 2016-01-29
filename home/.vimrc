@@ -51,6 +51,7 @@ Plugin 'junegunn/vim-easy-align'
 """""" Syntax and Syntax-ish things
 Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
+Plugin 'ervandew/supertab'
 " Plugin 'octol/vim-cpp-enhanced-highlight'
 
 let g:syntastic_cpp_compiler = 'clang'
@@ -68,7 +69,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
 Plugin 'wting/rust.vim'
-"Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
 Plugin 'beyondmarc/glsl.vim'
 

@@ -160,5 +160,5 @@ bar {
     }
 }
 
-
+exec time-wallpaper-set
 exec ~/.xrc

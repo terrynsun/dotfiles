@@ -20,7 +20,6 @@ export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 
 # Programs
-feh --bg-scale ~/.background.jpg &
 xbacklight -set 20 &
 redshift -l 37:-121 &
 nm-applet &
@@ -28,7 +27,6 @@ nm-applet &
 pulseaudio --start
 amixer sset Master mute
 xrandr --dpi 110
-sh .xrc
 
 export PATH=$PATH:$HOME/.local/bin
 exec i3

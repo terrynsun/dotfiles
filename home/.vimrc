@@ -62,6 +62,9 @@ let g:syntastic_mode_map = {
 \   }
 let g:syntastic_always_populate_loc_list = 1
 
+Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'vim-scripts/VisIncr'
+
 " Plugin 'Valloric/YouCompleteMe'
 
 """""" Language Specific
@@ -112,6 +115,9 @@ set scrolloff=4                    " 4 line buffer above/below
 " Search options
 set incsearch hlsearch showmatch   " improve search display
 set ignorecase smartcase           " search case options
+
+set foldmethod=syntax
+set foldlevel=100
 
 set noerrorbells
 
@@ -167,6 +173,8 @@ au FileType coq inoremap <C-j> <C-o>:CoqNext<CR>
 au FileType coq inoremap <C-k> <C-o>:CoqUndo<CR>
 au FileType coq nnoremap cq :CoqToCursor<CR>
 au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
+
+autocmd VimEnter *.rs set cc=99
 
 """"""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
 nnoremap <space> :noh<cr>

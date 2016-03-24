@@ -7,6 +7,7 @@ alias ls='ls --color=auto'
 
 # Cargo
 alias cb='cargo build'
+alias ch='cargo check'
 alias cr='cargo run'
 alias ct='cargo test'
 alias c='cargo'
@@ -15,7 +16,7 @@ alias m='make'
 alias mt='make test'
 alias mc='make clean'
 
-# alias vim='nvim'
+#alias vim='nvim'
 
 # Swap keybaord layouts
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
@@ -25,7 +26,7 @@ alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodm
 alias mute='amixer set Master mute'
 
 # In case I ever do this emacs thing again
-# alias emacs='emacs -nw' # no-window option
+alias emacs='emacs -nw' # no-window option
 # alias vime='emacs -nw'  # vim-emacs-evilmode
 # alias vi='vim'          # stop accidentally typing vi
 

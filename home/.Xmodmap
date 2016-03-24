@@ -13,7 +13,7 @@ keycode 66  = Escape
 keycode 36 = Return
 
 ! PrtSc -> Alt
-keycode 107 = Alt_L
+keycode 107 = Alt_R
 
 ! Windows -> Super
 keycode 133 = Super_L

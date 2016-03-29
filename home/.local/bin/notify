@@ -1,0 +1,4 @@
+#!/bin/bash
+
+CMD=$@
+eval ${CMD} && notify-send "Command finished" "${CMD}"

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+HOUR=$(date +%H)
+
+if [ $HOUR -lt 4 ]; then
+    WALL=7
+elif [ $HOUR -lt 6 ]; then
+    WALL=0
+elif [ $HOUR -lt 12 ]; then
+    WALL=1
+elif [ $HOUR -lt 15 ]; then
+    WALL=2
+elif [ $HOUR -lt 17 ]; then
+    WALL=3
+elif [ $HOUR -lt 18 ]; then
+    WALL=4
+elif [ $HOUR -lt 20 ]; then
+    WALL=5
+elif [ $HOUR -lt 22 ]; then
+    WALL=6
+elif [ $HOUR -lt 24 ]; then
+    WALL=7
+fi
+
+feh --bg-scale /home/sun/.local/bin/time/${WALL}.png
+
+echo $(date) >> /home/sun/.local/bin/log

@@ -164,6 +164,8 @@ autocmd VimEnter *.json set conceallevel=0
 
 autocmd VimLeave *.tex !rm *.log *.aux
 
+autocmd BufNewFile,BufRead *.sage set syntax=python
+
 autocmd VimEnter *.v CoqLaunch
 au FileType coq hi CheckedByCoq ctermbg=189
 au FileType coq hi SentToCoq ctermbg=188

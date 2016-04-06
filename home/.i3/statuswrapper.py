@@ -106,7 +106,7 @@ if __name__ == '__main__':
             elif name == 'battery':
                 if text.startswith('charging'):
                     e['full_text'] = "🔌%s" % (text)
-                    e['color'] = ORANGE
+                    e['color'] = YELLOW
                 else: # 🗲
                     e['full_text'] = "🔋%s" % (text)
                     match_hrs = regex_battery.search(text)

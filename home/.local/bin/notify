@@ -1,4 +1,9 @@
 #!/bin/bash
 
 CMD=$@
-eval ${CMD}; notify-send "Command finished" "${CMD}"
+START=$(date +%s)
+eval ${CMD}
+END=$(date +%s)
+ELAPSED=$(($END-$START))
+TIMESTR=$(date -u -d @${ELAPSED} +"%T")
+notify-send "Command finished" "${CMD}\nTook ${TIMESTR}."

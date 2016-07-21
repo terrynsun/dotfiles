@@ -23,5 +23,3 @@ elif [ $HOUR -lt 24 ]; then
 fi
 
 feh --bg-scale /home/sun/.local/bin/time/${WALL}.png
-
-echo $(date) >> /home/sun/.local/bin/log

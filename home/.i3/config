@@ -1,7 +1,6 @@
 # i3 config file (v4)
 
-set $mod Mod1
-set $modcode 64
+set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 font pango:DejaVu Sans 10

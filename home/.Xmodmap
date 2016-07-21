@@ -1,19 +1,8 @@
-! Escape -> null
-! keycode  9  =
-!
-! BackSpace -> BackSpace
-! keycode 22  = BackSpace
-! Enter -> null
-! keycode 36  = 
-
 ! CapsLock -> Escape
 keycode 66  = Escape
 
+! Bottom row keys:
 ! Ctrl, Super, BackSpace, [ Space ], Return, Alt, Ctrl
-keycode 36 = Return
-
-! PrtSc -> Alt
-keycode 107 = Alt_R
 
 ! Windows -> Super
 keycode 133 = Super_L
@@ -24,9 +13,12 @@ keycode 64 = BackSpace
 ! Alt_R -> Return
 keycode 108 = Return
 
+! PrtSc -> Alt
+keycode 107 = Alt_R
+
+! Media keys
 !  F9 F10 F11 F12
 ! 179 225 128 152
-!
 keycode 225 = XF86AudioPrev
 keycode 128 = XF86AudioPlay
 keycode 152 = XF86AudioNext
@@ -38,6 +30,5 @@ clear mod3
 clear mod4
 clear mod5
 
-add mod1 = Super_L Super_R
-add mod4 = Alt_L
-add mod5 = Alt_R
+add mod1 = Alt_R
+add mod4 = Super_L

@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/misc")
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -18,8 +18,8 @@
 (require 'evil-org)
 
 ;; Color scheme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'solarized-light t)
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;(load-theme 'solarized-light t)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -84,37 +84,51 @@
 (define-key global-map [(control ?s)] 'remember)
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-custom-commands
+   (quote
+    (("d" todo "DELEGATED" nil)
+     ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+     ("w" todo "WAITING" nil)
+     ("W" agenda ""
+      ((org-agenda-ndays 21)))
+     ("A" agenda ""
+      ((org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#A\\]")))
+       (org-agenda-ndays 1)
+       (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+     ("u" alltodo ""
+      ((org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote scheduled)
+           (quote deadline)
+           (quote regexp)
+           "
+]+>")))
+       (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
  '(org-agenda-files (quote ("~/org/")))
- '(org-default-notes-file "~/org/notes.org")
  '(org-agenda-ndays 7)
- '(org-deadline-warning-days 14)
  '(org-agenda-show-all-dates t)
  '(org-agenda-skip-deadline-if-done t)
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday nil)
- '(org-reverse-note-order t)
+ '(org-deadline-warning-days 14)
+ '(org-default-notes-file "~/org/notes.org")
  '(org-fast-tag-selection-single-key (quote expert))
- '(org-agenda-custom-commands
-   (quote (("d" todo "DELEGATED" nil)
-       ("c" todo "DONE|DEFERRED|CANCELLED" nil)
-       ("w" todo "WAITING" nil)
-       ("W" agenda "" ((org-agenda-ndays 21)))
-       ("A" agenda ""
-        ((org-agenda-skip-function
-          (lambda nil
-        (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-         (org-agenda-ndays 1)
-         (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-       ("u" alltodo ""
-        ((org-agenda-skip-function
-          (lambda nil
-        (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-                      (quote regexp) "\n]+>")))
-         (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
  '(org-remember-store-without-prompt t)
  '(org-remember-templates
-   (quote ((116 "* TODO %?\n  %u" "~/org/todo.org" "Pending")
-       (110 "* %u %?" "~/org/notes.org" "Notes"))))
+   (quote
+    ((116 "* TODO %?
+  %u" "~/org/todo.org" "Pending")
+     (110 "* %u %?" "~/org/notes.org" "Notes"))))
+ '(org-reverse-note-order t)
  '(remember-annotation-functions (quote (org-remember-annotation)))
  '(remember-handler-functions (quote (org-remember-handler))))
 
@@ -128,3 +142,10 @@
     (define-key org-agenda-mode-map "j" 'evil-next-line)
     (define-key org-agenda-mode-map "k" 'evil-previous-line)
     ))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:inherit outline-1 :foreground "blue"))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "green")))))

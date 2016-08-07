@@ -1,0 +1,7 @@
+#!/bin/sh
+
+WIKIROOT=~/wiki/
+cd $WIKIROOT
+pwd
+gollum --adapter rugged --config config.rb
+echo 4

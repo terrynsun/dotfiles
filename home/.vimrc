@@ -13,11 +13,16 @@ Plugin 'vim-scripts/a.vim'
 
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
-    \ 'colorscheme': 'solarized',
-    \ 'component': {
-    \   'readonly': '%{&readonly?"⭤":""}',
-    \     }
-    \ }
+  \   'colorscheme': 'solarized',
+  \   'active': {
+  \     'left': [ [ 'mode', 'paste' ],
+  \               [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+  \   },
+  \   'component': {
+  \     'readonly': '%{&readonly?"x":""}',
+  \     'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+  \   }
+  \ }
 
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
@@ -39,14 +44,15 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 
 """"""" Misc. utilities
+runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-sleuth'
-runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'vim-scripts/ReplaceWithRegister'
 
 """""" Syntax and Syntax-ish things
 Plugin 'Yggdroot/indentLine'
@@ -58,7 +64,7 @@ let g:syntastic_cpp_compiler = 'clang'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_mode_map = {
 \   "mode": "active",
-\   "passive_filetypes": [ "scala" ]
+\   "passive_filetypes": [ "scala", "python" ]
 \   }
 let g:syntastic_always_populate_loc_list = 1
 
@@ -74,10 +80,11 @@ let JSHintUpdateWriteOnly=1
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
-Plugin 'beyondmarc/glsl.vim'
+"Plugin 'lervag/vimtex'
 
-Plugin 'def-lkb/vimbufsync'
-Plugin 'the-lambda-church/coquille'
+"Plugin 'beyondmarc/glsl.vim'
+"Plugin 'def-lkb/vimbufsync'
+"Plugin 'the-lambda-church/coquille'
 
 "Plugin 'vim-ruby/vim-ruby'
 "Plugin 'derekwyatt/vim-scala'
@@ -92,6 +99,7 @@ Plugin 'the-lambda-church/coquille'
 call vundle#end()
 filetype plugin indent on
 
+" Lightline config
 set lazyredraw
 set laststatus=2
 set noshowmode
@@ -109,7 +117,7 @@ set shiftround                     " round to nearest tabstop of spaces
 
 " Numbering
 set number                         " line numbering
-set tw=80 cc=81 wrap               " line wrap (input/display), color column
+set tw=80 cc=81 wrap linebreak     " line wrap (input/display), color column
 set scrolloff=4                    " 4 line buffer above/below
 
 " Search options
@@ -132,7 +140,6 @@ endif
 " Save undo tree
 set undofile
 set undodir=~/.vim/undo
-set undolevels=1000
 set undolevels=10000
 
 " List training whitespace
@@ -154,29 +161,31 @@ set nojoinspaces
 syntax enable
 colorscheme solarized
 
-" compile .tex on save, clean directory on exit
+" compile .tex on save
 "autocmd BufWritePost *.tex !pdflatex "<afile>"
-autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+" autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+" autocmd VimLeave *.tex !rm *.log *.aux
 
-autocmd VimEnter *.tex set conceallevel=0
-autocmd VimEnter *.md set conceallevel=0
-autocmd VimEnter *.json set conceallevel=0
+au FileType tex nnoremap j gj
+au FileType tex nnoremap k gk
+autocmd BufEnter *.tex set conceallevel=0
+autocmd BufEnter *.tex set tw=100 cc=100
+autocmd BufEnter *.md set conceallevel=0
+autocmd BufEnter *.json set conceallevel=0
 
-autocmd VimLeave *.tex !rm *.log *.aux
+autocmd BufNewFile,BufRead *.sage set filetype=python
 
-autocmd BufNewFile,BufRead *.sage set syntax=python
+" autocmd VimEnter *.v CoqLaunch
+" au FileType coq hi CheckedByCoq ctermbg=189
+" au FileType coq hi SentToCoq ctermbg=188
+" au FileType coq nnoremap <C-j> :CoqNext<CR>
+" au FileType coq nnoremap <C-k> :CoqUndo<CR>
+" au FileType coq inoremap <C-j> <C-o>:CoqNext<CR>
+" au FileType coq inoremap <C-k> <C-o>:CoqUndo<CR>
+" au FileType coq nnoremap cq :CoqToCursor<CR>
+" au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
 
-autocmd VimEnter *.v CoqLaunch
-au FileType coq hi CheckedByCoq ctermbg=189
-au FileType coq hi SentToCoq ctermbg=188
-au FileType coq nnoremap <C-j> :CoqNext<CR>
-au FileType coq nnoremap <C-k> :CoqUndo<CR>
-au FileType coq inoremap <C-j> <C-o>:CoqNext<CR>
-au FileType coq inoremap <C-k> <C-o>:CoqUndo<CR>
-au FileType coq nnoremap cq :CoqToCursor<CR>
-au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
-
-autocmd VimEnter *.rs set cc=99
+autocmd BufEnter,BufNewFile *.rs set cc=101
 
 """"""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
 nnoremap <space> :noh<cr>

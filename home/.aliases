@@ -2,7 +2,7 @@
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Always want colord ls
+# Always use colored ls
 alias ls='ls --color=auto'
 
 # Cargo
@@ -16,7 +16,7 @@ alias m='make'
 alias mt='make test'
 alias mc='make clean'
 
-#alias vim='nvim'
+alias vim='nvim'
 
 # Swap keybaord layouts
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
@@ -41,7 +41,7 @@ alias gits='git status'
 alias gita='git add'
 alias gitc='git commit'
 
-alias org='emacs ~/log/todo.org'
+alias org='emacs ~/todo.org'
 
 alias venv='source venv/bin/activate'
 

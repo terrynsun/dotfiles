@@ -1,3 +1,4 @@
 .i3
 .config/dunst
 .local
+.local/bin

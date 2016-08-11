@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# https://github.com/Arcaena/i3lock-color
+
+i3lock \
+    --color=839496              \
+    --insidecolor=839496bf      \
+    --ringcolor=268bd2ff        \
+    --linecolor=002b36ff        \
+                                \
+    --insidevercolor=6c71c4bf   \
+    --ringvercolor=268bd2ff     \
+                                \
+    --ringwrongcolor=cb4b16bf   \
+    --insidewrongcolor=dc322fff \
+                                \
+    --textcolor=ffffffff        \
+    --keyhlcolor=2aa198ff       \
+    --bshlcolor=ff8000ff

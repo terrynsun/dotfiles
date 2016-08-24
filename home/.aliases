@@ -5,43 +5,39 @@ alias mv='mv -i'
 # Always use colored ls
 alias ls='ls --color=auto'
 
-# Cargo
+### Cargo
 alias cb='cargo build'
 alias ch='cargo check'
 alias cr='cargo run'
 alias ct='cargo test'
 alias c='cargo'
 
+### Git
+alias g='git'
+alias gits='git status'
+alias gita='git add'
+alias gitc='git commit'
+
+### Make
 alias m='make'
 alias mt='make test'
 alias mc='make clean'
 
+alias vi='/usr/bin/vim'
 alias vim='nvim'
+# In case I ever do this emacs thing again
+alias emacs='emacs -nw' # no-window option
+alias vundle='vim +BundleInstall +qall'
 
-# Swap keybaord layouts
+### Keyboard
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
 alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap'
 
 # Quick mute
 alias mute='amixer set Master mute'
 
-# In case I ever do this emacs thing again
-alias emacs='emacs -nw' # no-window option
-# alias vime='emacs -nw'  # vim-emacs-evilmode
-# alias vi='vim'          # stop accidentally typing vi
-
 # WQHS radio show
 alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
-
-# vim vundle install
-alias vundle='vim +BundleInstall +qall'
-
-alias g='git'
-alias gits='git status'
-alias gita='git add'
-alias gitc='git commit'
-
-alias org='emacs ~/todo.org'
 
 alias venv='source venv/bin/activate'
 

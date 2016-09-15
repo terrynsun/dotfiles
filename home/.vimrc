@@ -9,7 +9,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 """"""" Navigation
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'vim-scripts/a.vim'
 
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
@@ -33,7 +32,6 @@ let g:ctrlp_custom_ignore = {
 Plugin 'mbbill/undotree'
 let g:undotree_HighlightChangedText = 0
 
-Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
 
 """"""" Display
@@ -47,24 +45,24 @@ Plugin 'tpope/vim-fugitive'
 runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'vim-scripts/ReplaceWithRegister'
+Plugin 'triglav/vim-visual-increment'
 
 """""" Syntax and Syntax-ish things
 Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
-" Plugin 'octol/vim-cpp-enhanced-highlight'
 
-let g:syntastic_cpp_compiler = 'clang'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+" let g:syntastic_cpp_compiler = 'clang'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_mode_map = {
 \   "mode": "active",
-\   "passive_filetypes": [ "scala", "python" ]
+\   "passive_filetypes": [ "scala", "python", "rust" ]
 \   }
 let g:syntastic_always_populate_loc_list = 1
 
@@ -77,12 +75,14 @@ Plugin 'vim-scripts/VisIncr'
 Plugin 'pangloss/vim-javascript'
 Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
-Plugin 'wting/rust.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
-"Plugin 'lervag/vimtex'
 
+"Plugin 'lervag/vimtex'
+"Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'beyondmarc/glsl.vim'
+
 "Plugin 'def-lkb/vimbufsync'
 "Plugin 'the-lambda-church/coquille'
 

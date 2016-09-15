@@ -1,18 +1,12 @@
+### zsh configuration
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# plugins=(git-extras tmux sudo)
 plugins=(z sudo)
-
-# Tmux plugin
-export ZSH_TMUX_AUTOSTART=true
 
 # Activate plugins
 source $ZSH/oh-my-zsh.sh
-
-if [ -f $HOME/.aliases ]; then
-  source $HOME/.aliases
-fi
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="false"
@@ -30,23 +24,24 @@ autoload -Uz promptinit
 promptinit
 prompt walters
 
-export EDITOR=vim
-#export CC=clang
+if [ -f $HOME/.aliases ]; then
+  source $HOME/.aliases
+fi
 
-# Set path
+### Set path
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.3.0/bin
 
-# Have bundler install to ~/.gem/ruby/2.2.0/bin
+# Have bundler install to ~/.gem/ruby/2.3.0/bin
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
-# export TERM=screen-256color
+export EDITOR=vim
+#export CC=clang
 
-# # Auto-open tmux
+### Auto-open tmux
 if [[ -z $TMUX ]] ; then
   if [[ -z $(tmux list-sessions | grep main) ]] ; then
     tmux new-session -s main

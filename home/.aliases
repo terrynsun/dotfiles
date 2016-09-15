@@ -23,11 +23,12 @@ alias m='make'
 alias mt='make test'
 alias mc='make clean'
 
+### Editors
+alias vundle='vim +BundleInstall +qall'
 alias vi='/usr/bin/vim'
 alias vim='nvim'
 # In case I ever do this emacs thing again
 alias emacs='emacs -nw' # no-window option
-alias vundle='vim +BundleInstall +qall'
 
 ### Keyboard
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
@@ -42,3 +43,5 @@ alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
 alias venv='source venv/bin/activate'
 
 alias ym='yoga monitor'
+
+alias jserve='bundle exec jekyll serve'

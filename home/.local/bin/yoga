@@ -47,6 +47,7 @@ function rotate {
     echo xinput set-prop "Wacom ISDv4 EC Pen stylus" "Coordinate Transformation Matrix" $mtx
     xinput set-prop "${PEN_NAME}" "Coordinate Transformation Matrix" $mtx
     xinput set-prop "${SCREEN_NAME}" "Coordinate Transformation Matrix" $mtx
+    ~/.local/bin/wallpaper
 }
 
 # xinput disable $(ID)

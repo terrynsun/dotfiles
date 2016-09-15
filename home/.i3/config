@@ -1,5 +1,4 @@
 # i3 config file (v4)
-
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
@@ -107,9 +106,8 @@ bindsym $mod+r mode "resize"
 ################################ Custom Action #################################
 
 # go-to-sleep things
-# bindsym $mod+Shift+s exec i3lock && systemctl suspend
-bindsym $mod+Shift+s exec i3lock && pm-suspend
-bindsym $mod+Shift+p exec i3lock
+bindsym $mod+Shift+s exec i3lockcolor && pm-suspend
+bindsym $mod+Shift+p exec i3lockcolor
 
 # bind mixer volume keys
 bindsym XF86AudioMute        exec "pamixer --toggle-mute && killall -USR1 i3status"
@@ -159,4 +157,5 @@ bar {
     }
 }
 
-exec time-wallpaper-set
+# On startup
+exec wallpaper

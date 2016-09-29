@@ -11,6 +11,8 @@ if [ -f .Xmodmap ]; then
   xmodmap ~/.Xmodmap
 fi
 
+xset -b
+
 # Start GNOME Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

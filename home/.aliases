@@ -38,7 +38,7 @@ alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodm
 alias mute='amixer set Master mute'
 
 # WQHS radio show
-alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000/listen'
+alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000'
 
 alias venv='source venv/bin/activate'
 

@@ -1,10 +1,12 @@
 [user]
     email = terrynsun@gmail.com
     name = Terry Sun
+
 [core]
     autocrlf = input
     whitespace=fix,trailing-space,cr-at-eol
     excludesfile = /home/sun/.gitignore_global
+
 [color]
     ui = always
 
@@ -15,11 +17,11 @@
 
 [branch]
     autosetuprebase = remote
+
 [push]
     default = upstream
 
-[merge]
-    tool = meld
+[merge] tool = meld
 
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

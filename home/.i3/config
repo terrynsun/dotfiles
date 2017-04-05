@@ -159,3 +159,6 @@ bar {
 
 # On startup
 exec wallpaper
+exec keepassx
+
+assign [class="Keepass"] 10

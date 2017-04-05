@@ -23,9 +23,9 @@ let g:lightline = {
   \   }
   \ }
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|bin|build|_build)$',
+  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
   \ 'file': '\v\.(exe|so|dll|class|o)$',
   \ }
 
@@ -69,9 +69,20 @@ let g:syntastic_always_populate_loc_list = 1
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'vim-scripts/VisIncr'
 
+" Use deoplete.
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'Shougo/neoinclude.vim'
+
+let g:deoplete#enable_at_startup = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+Plugin 'zchee/deoplete-clang'
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+
 " Plugin 'Valloric/YouCompleteMe'
 
 """""" Language Specific
+Plugin 'vim-scripts/a.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
@@ -162,9 +173,9 @@ syntax enable
 colorscheme solarized
 
 " compile .tex on save
-"autocmd BufWritePost *.tex !pdflatex "<afile>"
-" autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
-" autocmd VimLeave *.tex !rm *.log *.aux
+autocmd BufWritePost *.tex !pdflatex "<afile>"
+autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+autocmd VimLeave *.tex !rm *.log *.aux
 
 au FileType tex nnoremap j gj
 au FileType tex nnoremap k gk

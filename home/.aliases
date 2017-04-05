@@ -19,7 +19,7 @@ alias gita='git add'
 alias gitc='git commit'
 
 ### Make
-alias m='make'
+alias m='make -j 4'
 alias mt='make test'
 alias mc='make clean'
 
@@ -36,9 +36,6 @@ alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodm
 
 # Quick mute
 alias mute='amixer set Master mute'
-
-# WQHS radio show
-alias radio='mplayer http://wqhs6.vpul.upenn.edu:8000'
 
 alias venv='source venv/bin/activate'
 

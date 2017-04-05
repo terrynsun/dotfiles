@@ -1,5 +1,3 @@
-### zsh configuration
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -10,6 +8,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="false"
+
+# No incremental append for history
+unsetopt INC_APPEND_HISTORY
 
 # Autocompletion
 autoload -U compinit
@@ -33,9 +34,9 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cabal/bin
-export PATH=$PATH:$HOME/.gem/ruby/2.3.0/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
 
-# Have bundler install to ~/.gem/ruby/2.3.0/bin
+# Have bundler install to ~/.gem/ruby/2.4.0/bin
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 export EDITOR=vim
@@ -56,7 +57,3 @@ fi
 if [[ -z $(tmux list-sessions | grep attached) ]]; then
   tmux kill-session -a
 fi
-
-# # OPAM configuration
-# . /home/sun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-# eval `opam config env`

@@ -7,7 +7,9 @@ set shell=/bin/bash
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-""""""" Navigation
+"------------
+" Navigation
+"------------
 Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'itchyny/lightline.vim'
@@ -29,32 +31,52 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class|o)$',
   \ }
 
+" <F3>
 Plugin 'mbbill/undotree'
 let g:undotree_HighlightChangedText = 0
 
+" <F12>
 Plugin 'scrooloose/nerdtree'
 
-""""""" Display
+"------------
+" Display
+"------------
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Yggdroot/indentLine'
 
-""""""" DVCS
+"------------
+" DVCS
+"------------
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+"[hg] Plugin 'tpope/vim-fugitive'
 
-""""""" Misc. utilities
+"------------
+" Utilities
+"------------
 runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
+
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-sleuth'            " try to automatically set tab length
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-speeddating'       " fix increment for dates
 Plugin 'tpope/vim-dispatch'
+
+" <Enter>
 Plugin 'junegunn/vim-easy-align'
+
+" TODO
 Plugin 'vim-scripts/ReplaceWithRegister'
+
+" select block and C-A or C-X
 Plugin 'triglav/vim-visual-increment'
 
-"""""" Syntax and Syntax-ish things
-Plugin 'Yggdroot/indentLine'
+"------------
+" Syntax
+"------------
+" TODO
+Plugin 'dhruvasagar/vim-table-mode'
+
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 
@@ -65,9 +87,6 @@ let g:syntastic_mode_map = {
 \   "passive_filetypes": [ "scala", "python", "rust" ]
 \   }
 let g:syntastic_always_populate_loc_list = 1
-
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'vim-scripts/VisIncr'
 
 " Use deoplete.
 "Plugin 'Shougo/deoplete.nvim'
@@ -81,12 +100,20 @@ let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 
 " Plugin 'Valloric/YouCompleteMe'
 
-"""""" Language Specific
+"-------------------
+" Language-Specific
+"-------------------
+
+" Use :A to switch .c <-> .h
 Plugin 'vim-scripts/a.vim'
+
+
 Plugin 'pangloss/vim-javascript'
 Plugin 'wookiehangover/jshint.vim'
 let JSHintUpdateWriteOnly=1
+
 Plugin 'rust-lang/rust.vim'
+
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
 
@@ -110,12 +137,15 @@ let g:markdown_fenced_languages = ['rust']
 call vundle#end()
 filetype plugin indent on
 
-" Lightline config
+"-------------------
+" Lightline Config
+"-------------------
+
 set lazyredraw
 set laststatus=2
 set noshowmode
 
-""""""""""""""""""""""""""""" General Vim Settings """""""""""""""""""""""""""""
+"""""""""""""""""""""""""""" General Vim Settings """"""""""""""""""""""""""""
 
 set ruler
 set showcmd
@@ -123,7 +153,7 @@ set showcmd
 " Tab stuff
 set autoindent smartindent         " copy indent to nl; autoindent on nl
 set expandtab smarttab             " tabs set to spaces; backspace by tabstop
-set ts=4 sw=4 sts=4                " tab lengths - default 4
+set ts=4 sw=4 sts=4                " tab lengths - default 4 [usually overriden]
 set shiftround                     " round to nearest tabstop of spaces
 
 " Numbering
@@ -140,6 +170,18 @@ set foldlevel=100
 
 set noerrorbells
 
+set list listchars=tab:»\ ,trail:· " display training whitespace
+set splitbelow splitright          " open new splits to the bottom and right
+set nojoinspaces                   " don't append lines (J) with spaces
+
+set clipboard=unnamed,unnamedplus  " use global clipboard
+
+" Save undo tree to undodir
+set undofile
+set undodir=~/.vim/undo
+set undolevels=10000
+
+" Terminal settings
 if has('mouse')
   set mouse=a
   set mousemodel=extend
@@ -148,44 +190,38 @@ if has('mouse')
   endif
 endif
 
-" Save undo tree
-set undofile
-set undodir=~/.vim/undo
-set undolevels=10000
-
-" List training whitespace
-set list listchars=tab:»\ ,trail:·
-
-" Splitting on the proper side
-set splitbelow splitright
-
 " Fast escape (neovim)
 if has('nvim')
     set ttimeout
     set ttimeoutlen=-1
 endif
 
-set nojoinspaces
-
-"""""""""""""""""""""""""""""" Filetype Settings """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""" Filetype Settings """"""""""""""""""""""""""""""
 
 syntax enable
 colorscheme solarized
 
-" compile .tex on save
+" Misc
+autocmd BufNewFile,BufRead *.sage set filetype=python
+
+autocmd BufEnter,BufNewFile *.rs set cc=101
+
+" Conceallevel fix for some filetypes
+autocmd BufEnter *.tex set conceallevel=0
+autocmd BufEnter *.md set conceallevel=0
+autocmd BufEnter *.json set conceallevel=0
+
+" LaTeX
+" compile on save
 autocmd BufWritePost *.tex !pdflatex "<afile>"
 autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
 autocmd VimLeave *.tex !rm *.log *.aux
 
 au FileType tex nnoremap j gj
 au FileType tex nnoremap k gk
-autocmd BufEnter *.tex set conceallevel=0
 autocmd BufEnter *.tex set tw=100 cc=100
-autocmd BufEnter *.md set conceallevel=0
-autocmd BufEnter *.json set conceallevel=0
 
-autocmd BufNewFile,BufRead *.sage set filetype=python
-
+" Coq
 " autocmd VimEnter *.v CoqLaunch
 " au FileType coq hi CheckedByCoq ctermbg=189
 " au FileType coq hi SentToCoq ctermbg=188
@@ -196,10 +232,10 @@ autocmd BufNewFile,BufRead *.sage set filetype=python
 " au FileType coq nnoremap cq :CoqToCursor<CR>
 " au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
 
-autocmd BufEnter,BufNewFile *.rs set cc=101
-
-""""""""""""""""""""""""""""""""" Custom remaps """"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""" Custom remaps """""""""""""""""""""""""""""""
+" stop search highlighting
 nnoremap <space> :noh<cr>
+" enter newline
 nnoremap <CR> o<ESC>k
 
 map <F2> :set paste!<CR>
@@ -214,20 +250,14 @@ map <F12> :NERDTree<CR>
 
 vmap <Enter> <Plug>(EasyAlign)
 
-" put selection in math mode for latex
+" tex: put selection in math mode
 xmap m S$
-
-" Y to yank to end of line
-nnoremap Y y$
-
-" use global clipboard
-set clipboard=unnamed,unnamedplus
 
 if has('nvim')
     nnoremap <Leader>m :rightbelow vertical split <bar> :term make<cr>
 endif
 
-""""""""""""""""""""""""""""""""""" Commands """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
 command W wall|Make
 
 function! WriteSmall()

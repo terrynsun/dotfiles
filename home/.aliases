@@ -2,8 +2,10 @@
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Always use colored ls
+# Always use colors
 alias ls='ls --color=auto'
+alias grep='grep --color=alwas --exclude-dir={.git} -I'
+alias rg='rg --color=always'
 
 ### Cargo
 alias cb='cargo build'
@@ -25,7 +27,7 @@ alias mt='make test'
 alias mc='make clean'
 
 ### Editors
-alias vundle='vim +BundleInstall +qall'
+alias vundle='vim +PluginInstall +qall'
 alias vi='/usr/bin/vim'
 #alias vim='nvim'
 alias emacs='emacs -nw' # no-window option
@@ -42,3 +44,5 @@ alias venv='source venv/bin/activate'
 alias ym='yoga monitor'
 
 alias jserve='bundle exec jekyll serve'
+
+alias lua='rlwrap lua'

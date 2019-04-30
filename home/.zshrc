@@ -33,14 +33,18 @@ fi
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
 
 # Have bundler install to ~/.gem/ruby/2.4.0/bin
-export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+#export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 export EDITOR=vim
 #export CC=clang
+
+# Dircolors from gnome-terminal-colors-solarized
+if [ -f ~/.dir_colors/dircolors ]; then
+  eval `dircolors ~/.dir_colors/dircolors`
+fi
 
 ### Auto-open tmux
 if [[ -z $TMUX ]] ; then

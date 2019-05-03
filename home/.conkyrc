@@ -41,7 +41,7 @@ conky.text = [[
   [
     {
       "name": "volume"
-    , "full_text": "🎵${exec pamixer --get-volume}%"
+    , "full_text": "🎵${exec amixer get Master | awk -F'[][]' '/dB/ { print $2 }' }"
     , "color": "\#fffffff"
     },
     {
@@ -50,16 +50,8 @@ conky.text = [[
     , "color": "\#ffffff"
     },
     {
-      "full_text": "🌲${fs_free /}"
-    , "color": "\#fdf6e3"
-    },
-    {
-      "full_text": "🌡${acpitemp}°C"
-    , "color": ${if_match ${acpitemp}<50} "\#93a1a1" ${else} ${if_match ${acpitemp}<65} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
-    },
-    {
       "name": "wireless"
-    , "full_text": "W: ${wireless_essid} · (${addr wlp4s0})"
+    , "full_text": "W: ${wireless_essid} · (${addrs wlp61s0})"
     , "color": "\#ffffff"
     },
     {
@@ -69,6 +61,19 @@ conky.text = [[
     {
       "full_text": "🐏${memperc}%"
     , "color": ${if_match ${memperc}<50} "\#93a1a1" ${else} ${if_match ${memperc}<75} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
+    },
+    {
+      "full_text": "🌡${acpitemp}°C"
+    , "color": ${if_match ${acpitemp}<50} "\#93a1a1" ${else} ${if_match ${acpitemp}<65} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
+    },
+    {
+      "full_text": "🌲${fs_free /}"
+    , "color": "\#fdf6e3"
+    },
+    {
+      "name": "time_utc"
+    , "full_text": "${utime %Y-%m-%d %R UTC}"
+    , "color": "\#fdf6e3"
     },
     {
       "name": "time"

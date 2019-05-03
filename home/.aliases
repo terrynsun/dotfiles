@@ -4,7 +4,7 @@ alias mv='mv -i'
 
 # Always use colors
 alias ls='ls --color=auto'
-alias grep='grep --color=alwas --exclude-dir={.git} -I'
+alias grep='grep --color=always --exclude-dir={.git} -I'
 alias rg='rg --color=always'
 
 ### Cargo

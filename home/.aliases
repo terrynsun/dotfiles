@@ -45,4 +45,4 @@ alias ym='yoga monitor'
 
 alias jserve='bundle exec jekyll serve'
 
-alias lua='rlwrap lua'
+alias lua='rlwrap luajit'

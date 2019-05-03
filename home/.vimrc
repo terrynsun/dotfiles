@@ -25,9 +25,10 @@ let g:lightline = {
   \   }
   \ }
 
+let g:ctrlp_max_files = 0
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
+  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug|bin)$',
   \ 'file': '\v\.(exe|so|dll|class|o)$',
   \ }
 
@@ -48,7 +49,7 @@ Plugin 'Yggdroot/indentLine'
 " DVCS
 "------------
 Plugin 'airblade/vim-gitgutter'
-"[hg] Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 "------------
 " Utilities
@@ -84,7 +85,7 @@ Plugin 'ervandew/supertab'
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_mode_map = {
 \   "mode": "active",
-\   "passive_filetypes": [ "scala", "python", "rust" ]
+\   "passive_filetypes": [ "scala", "python", "rust", "php" ]
 \   }
 let g:syntastic_always_populate_loc_list = 1
 
@@ -116,6 +117,9 @@ Plugin 'rust-lang/rust.vim'
 
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
+
+Plugin 'saltstack/salt-vim'
+Plugin 'chr4/nginx.vim'
 
 "Plugin 'lervag/vimtex'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -199,6 +203,7 @@ endif
 """"""""""""""""""""""""""""" Filetype Settings """"""""""""""""""""""""""""""
 
 syntax enable
+set background=light
 colorscheme solarized
 
 " Misc
@@ -238,7 +243,7 @@ nnoremap <space> :noh<cr>
 " enter newline
 nnoremap <CR> o<ESC>k
 
-map <F2> :set paste!<CR>
+map <F2> :Gblame<CR>
 map <F3> :UndotreeToggle<CR>
 map <F4> :SyntasticCheck<CR>
 
@@ -246,7 +251,7 @@ map <F4> :SyntasticCheck<CR>
 map <F5> :!reset<CR><CR>
 
 map <F11> :Sex<CR>
-map <F12> :NERDTree<CR>
+map <F12> :NERDTreeToggle<CR>
 
 vmap <Enter> <Plug>(EasyAlign)
 
@@ -258,11 +263,4 @@ if has('nvim')
 endif
 
 """""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
-command W wall|Make
-
-function! WriteSmall()
-    let mtime = system("date -d @`stat -c %Y ".shellescape(expand('%:p')) . "`")
-    write
-    call system("touch --date='".mtime."' ".shellescape(expand('%:p')))
-endfunction
-map <F6> :call WriteSmall()<CR>
+command W w

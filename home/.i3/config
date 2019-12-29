@@ -123,10 +123,10 @@ bindsym XF86MonBrightnessUp   exec xbacklight +5
 bindsym $mod+m move workspace to output left
 
 # rotate screen and pen/screen inputs
-bindsym $mod+Control+Left  exec "yoga rotate left"
-bindsym $mod+Control+Right exec "yoga rotate right"
-bindsym $mod+Control+Up    exec "yoga rotate normal"
-bindsym $mod+Control+Down  exec "yoga rotate inverted"
+bindsym $mod+Control+Left  exec "mon rotate left"
+bindsym $mod+Control+Right exec "mon rotate right"
+bindsym $mod+Control+Up    exec "mon rotate normal"
+bindsym $mod+Control+Down  exec "mon rotate inverted"
 
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
 
@@ -156,7 +156,6 @@ bar {
 }
 
 # On startup
-exec wallpaper
 exec keepassxc
 
 assign [class="KeepassXC"] 10

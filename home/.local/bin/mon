@@ -1,14 +1,12 @@
 #!/bin/bash
 
-PEN_NAME="Wacom ISDv4 EC Pen stylus"
-SCREEN_NAME="ELAN Touchscreen"
+SCREEN_NAME="Wacom HID 48EB Finger"
 
 function get_id {
     echo $(xinput --list | grep "$1" | grep -Eo "id=([0-9]+)" | cut -d= -f2)
 }
 
 function map_screen {
-    xinput --map-to-output "${PEN_NAME}" eDP1
     xinput --map-to-output "${SCREEN_NAME}" eDP1
 }
 
@@ -44,8 +42,6 @@ function rotate {
         mtx="0 -1 1 1 0 0 0 0 1"
     fi
     xrandr -o $1
-    echo xinput set-prop "Wacom ISDv4 EC Pen stylus" "Coordinate Transformation Matrix" $mtx
-    xinput set-prop "${PEN_NAME}" "Coordinate Transformation Matrix" $mtx
     xinput set-prop "${SCREEN_NAME}" "Coordinate Transformation Matrix" $mtx
     ~/.local/bin/wallpaper
 }

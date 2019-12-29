@@ -1,7 +1,8 @@
-# Path to your oh-my-zsh configuration.
+# Load oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-plugins=(z sudo)
+plugins=(z sudo ssh-agent)
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # Activate plugins
 source $ZSH/oh-my-zsh.sh
@@ -39,7 +40,6 @@ export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
 #export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 export EDITOR=vim
-#export CC=clang
 
 # Dircolors from gnome-terminal-colors-solarized
 if [ -f ~/.dir_colors/dircolors ]; then

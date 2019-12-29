@@ -90,6 +90,9 @@ if __name__ == '__main__':
 
             text = e['full_text']
             if name == "volume":
+                if "muted" in text:
+                    e['color'] = RED
+
                 if has_headphones():
                     e['full_text'] = "%s🎧" % text
                     e['color'] = YELLOW

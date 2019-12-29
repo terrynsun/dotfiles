@@ -41,7 +41,7 @@ conky.text = [[
   [
     {
       "name": "volume"
-    , "full_text": "🎵${exec pamixer --get-volume}"
+    , "full_text": "🎵${exec pamixer --get-volume-human}"
     , "color": "\#fffffff"
     },
     {

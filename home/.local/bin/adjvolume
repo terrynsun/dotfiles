@@ -1,1 +1,0 @@
-pamixer --set-volume $(($(pamixer --get-volume) + $1))

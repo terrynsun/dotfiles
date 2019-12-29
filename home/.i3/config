@@ -110,10 +110,10 @@ bindsym $mod+Shift+s exec i3lockcolor && pm-suspend
 bindsym $mod+Shift+p exec i3lockcolor
 
 # bind mixer volume keys
-bindsym XF86AudioMute        exec "pamixer --toggle-mute && killall -USR1 i3status"
-bindsym XF86AudioRaiseVolume exec "adjvolume +5 && killall -USR1 i3status"
-bindsym XF86AudioLowerVolume exec "adjvolume -5 && killall -USR1 i3status"
-bindsym XF86AudioMicMute exec "pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo toggle"
+bindsym XF86AudioMute        exec "pamixer --toggle-mute && killall -USR1 conky"
+bindsym XF86AudioRaiseVolume exec "pamixer -i 5 && killall -USR1 conky"
+bindsym XF86AudioLowerVolume exec "pamixer -d 5 && killall -USR1 conky"
+bindsym XF86AudioMicMute     exec "pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo toggle"
 
 # bind brightness keys
 bindsym XF86MonBrightnessDown exec xbacklight -5

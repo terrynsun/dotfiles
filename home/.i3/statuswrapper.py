@@ -36,11 +36,8 @@ RED        = '#dc322f'
 ORANGE     = '#cb4b16'
 YELLOW     = '#b58900'
 
-regex_time = re.compile("([0-9]+):([0-9]+):([0-9]+)")
 regex_battery = re.compile("([0-9]+)h")
 regex_wifi = re.compile("off")
-
-clocks = [ "🕛", "🕧", "🕐", "🕜", "🕑", "🕝", "🕒", "🕞", "🕓", "🕟", "🕔", "🕠", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕡", "🕢", "🕣", "🕤", "🕥", "🕦", ]
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
@@ -59,6 +56,15 @@ def read_line():
     # exit on ctrl-c
     except KeyboardInterrupt:
         sys.exit()
+
+def has_headphones():
+    out = subprocess.check_output(["pacmd", "list-sinks"])
+    matches = re.findall('active port.*$', out.decode(), re.MULTILINE)
+    for line in matches:
+        if 'headphones' in line:
+            return True
+
+    return False
 
 if __name__ == '__main__':
     # Skip the first line which contains the version header.
@@ -84,8 +90,7 @@ if __name__ == '__main__':
 
             text = e['full_text']
             if name == "volume":
-                code = str(subprocess.check_output("audio"))
-                if code[2] == '1':
+                if has_headphones():
                     e['full_text'] = "%s🎧" % text
                     e['color'] = YELLOW
             elif name == "wireless":
@@ -93,16 +98,6 @@ if __name__ == '__main__':
                     e['color'] = RED
                 else:
                     e['color'] = GREEN
-            elif name == 'time':
-                match_hrs = regex_time.search(text)
-                if match_hrs:
-                    h = match_hrs.group(1)
-                    h = int(h) % 12
-                    m = match_hrs.group(2)
-                    m = 1 if int(m) > 30 else 0
-                    clock = clocks[h*2 + m]
-                    e['full_text'] = "%s%s" % (clock, text)
-                sys.stderr.write(str(match_hrs.group(1)))
             elif name == 'battery':
                 if text.startswith('charging'):
                     e['full_text'] = "🔌%s" % (text)
@@ -110,6 +105,7 @@ if __name__ == '__main__':
                 else: # 🗲
                     e['full_text'] = "🔋%s" % (text)
                     match_hrs = regex_battery.search(text)
+                    # Warn if less than one hour.
                     if match_hrs and match_hrs.group(1) == '0':
                         e['color'] = RED
                     else:

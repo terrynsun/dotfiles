@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if (pacmd list-sinks | grep active | grep -q headphones); then
-    echo 1
-fi

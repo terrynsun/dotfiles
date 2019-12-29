@@ -41,7 +41,7 @@ conky.text = [[
   [
     {
       "name": "volume"
-    , "full_text": "🎵${exec amixer get Master | awk -F'[][]' '/dB/ { print $2 }' }"
+    , "full_text": "🎵${exec pamixer --get-volume}"
     , "color": "\#fffffff"
     },
     {
@@ -51,7 +51,7 @@ conky.text = [[
     },
     {
       "name": "wireless"
-    , "full_text": "W: ${wireless_essid} · (${addrs wlp61s0})"
+    , "full_text": "W: ${wireless_essid wlp0s20f3} · (${addrs wlp0s20f3})"
     , "color": "\#ffffff"
     },
     {

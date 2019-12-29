@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font pango:DejaVu Sans 10
+font pango:DejaVu Sans 9
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -141,12 +141,10 @@ client.focused          #859900 #859900 #fdf6e3 #2e9ef4
 client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
 client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
     position top
     #status_command i3status | ~/.i3/statuswrapper.py
-    status_command conkybar | ~/.i3/statuswrapper.py
+    status_command ~/.local/bin/conkybar | ~/.i3/statuswrapper.py
     colors {
         # solarized
         background #073642
@@ -159,6 +157,6 @@ bar {
 
 # On startup
 exec wallpaper
-exec keepassx
+exec keepassxc
 
-assign [class="Keepass"] 10
+assign [class="KeepassXC"] 10

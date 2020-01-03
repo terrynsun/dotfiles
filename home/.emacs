@@ -8,6 +8,8 @@
   (package-install 'evil))
 
 ;; Enable Evil
+; Bind tab to org-mode org-tab instead of what evil wants it for.
+(setq evil-want-C-i-jump nil)
 (require 'evil)
 (evil-mode 1)
 
@@ -17,16 +19,13 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+;; Install with https://github.com/Somelauw/evil-org-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
 
 ;; Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")

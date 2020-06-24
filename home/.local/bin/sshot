@@ -1,0 +1,10 @@
+#!/bin/sh
+
+arg=$1
+if [ $arg == '-f' ]; then
+    timestamp=$(date +%Y-%m-%d:%H-%M-%S)
+    maim -s > ~/$timestamp.png
+else
+    # By default: store into clipboard
+    maim -s -u | xclip -selection clipboard -t image/png -i
+fi

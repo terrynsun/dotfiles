@@ -1,0 +1,27 @@
+#!/bin/sh
+
+OP=$1
+if [ -z $OP ]; then
+    exit 1
+fi
+
+DIFF=5
+
+CUR=$(xbacklight)
+CURINT=${CUR%.*}
+
+if [ $CURINT -le 1 ] && [ $OP == '-' ]; then
+    DIFF=0
+elif [ $CURINT -le 5 ]; then
+    DIFF=1
+elif [ $CURINT -le 10 ]; then
+    DIFF=2
+elif [ $CURINT -le 20 ]; then
+    DIFF=3
+fi
+
+if [ $OP == '-' ]; then
+    xbacklight -$DIFF
+else
+    xbacklight +$DIFF
+fi

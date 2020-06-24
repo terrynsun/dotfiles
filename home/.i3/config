@@ -116,8 +116,8 @@ bindsym XF86AudioLowerVolume exec "pamixer -d 5 && killall -USR1 conky"
 bindsym XF86AudioMicMute     exec "pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo toggle"
 
 # bind brightness keys
-bindsym XF86MonBrightnessDown exec xbacklight -5
-bindsym XF86MonBrightnessUp   exec xbacklight +5
+bindsym XF86MonBrightnessDown exec "backlight -"
+bindsym XF86MonBrightnessUp   exec "backlight +"
 
 # change output monitor of workspace
 bindsym $mod+m move workspace to output left
@@ -158,4 +158,4 @@ bar {
 # On startup
 exec keepassxc
 
-assign [class="KeepassXC"] 10
+assign [class="KeePassXC"] 10

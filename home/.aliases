@@ -7,20 +7,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=always --exclude-dir={.git} -I'
 alias rg='rg --color=always'
 
-### Cargo
-alias cb='cargo build'
-alias ch='cargo check'
-alias cr='cargo run'
-alias ct='cargo test'
-alias cck='cargo check'
-alias c='cargo'
-
-### Git
-alias g='git'
-alias gits='git status'
-alias gita='git add'
-alias gitc='git commit'
-
 ### Make
 alias m='make -j 4'
 alias mt='make test'
@@ -35,14 +21,5 @@ alias emacs='emacs -nw' # no-window option
 ### Keyboard
 alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
 alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap'
-
-# Quick mute
-alias mute='amixer set Master mute'
-
-alias venv='source venv/bin/activate'
-
-alias ym='yoga monitor'
-
-alias jserve='bundle exec jekyll serve'
 
 alias lua='rlwrap luajit'

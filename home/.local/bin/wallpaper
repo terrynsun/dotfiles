@@ -22,4 +22,4 @@ elif [ $HOUR -lt 24 ]; then
     WALL=7
 fi
 
-DISPLAY=:0.0 feh --bg-scale /home/sun/.local/bin/time/${WALL}.png 2>&1
+DISPLAY=:0.0 feh --bg-scale ~/.local/bin/time/${WALL}.png 2>&1

@@ -1,8 +1,11 @@
 # Load oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-plugins=(z sudo ssh-agent)
-zstyle :omz:plugins:ssh-agent agent-forwarding on
+# INSTALL: run
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+plugins=(z sudo zsh-syntax-highlighting)
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # Activate plugins
 source $ZSH/oh-my-zsh.sh
@@ -26,6 +29,15 @@ autoload -Uz promptinit
 promptinit
 prompt walters
 
+# Print git branch in right prompt
+setopt PROMPT_SUBST
+rprompt() {
+  br=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+  echo -n "%F{green}%~%f"
+  [ -n "$br" ] && echo -n " %F{blue}$br%f"
+}
+export RPROMPT='$(rprompt)'
+
 if [ -f $HOME/.aliases ]; then
   source $HOME/.aliases
 fi
@@ -34,10 +46,7 @@ fi
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
-
-# Have bundler install to ~/.gem/ruby/2.4.0/bin
-#export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 
 export EDITOR=vim
 

@@ -174,7 +174,8 @@ set foldlevel=100
 
 set noerrorbells
 
-set list listchars=tab:»\ ,trail:· " display training whitespace
+set nofixendofline                 " stop adding trailing newlines
+set list listchars=tab:»\ ,trail:· " display trailing whitespace
 set splitbelow splitright          " open new splits to the bottom and right
 set nojoinspaces                   " don't append lines (J) with spaces
 

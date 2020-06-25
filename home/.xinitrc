@@ -1,33 +1,11 @@
-# Run other xinit scripts.
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
-fi
+# This script, along with .Xresources and .Xmodmap, are run by lxdm.
 
-# Keymap
-if [ -f .Xmodmap ]; then
-  xmodmap ~/.Xmodmap
-fi
-
-xset -b
-
-# Start GNOME Keyring
-eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
-export GPG_AGENT_INFO
-export GNOME_KEYRING_CONTROL
-export GNOME_KEYRING_PID
-
-# Programs
-xbacklight -set 20 &
+## Programs
+xbacklight -set 5
 redshift -l 37:-121 &
 nm-applet &
-
-pulseaudio --start
-amixer sset Master mute
-xrandr --dpi 110
-
+blueman-applet &
+picom -b
+~/.local/bin/wallpaper
+echo '.profile' >> ~/out
 export PATH=$PATH:$HOME/.local/bin
-exec i3

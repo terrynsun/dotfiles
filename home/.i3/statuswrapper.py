@@ -36,7 +36,7 @@ RED        = '#dc322f'
 ORANGE     = '#cb4b16'
 YELLOW     = '#b58900'
 
-regex_battery = re.compile("([0-9]+)h")
+regex_battery = re.compile("· ([0-9]+)h")
 regex_wifi = re.compile("off")
 
 def print_line(message):

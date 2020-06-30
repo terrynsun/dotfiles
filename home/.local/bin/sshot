@@ -3,7 +3,12 @@
 arg=$1
 if [ $arg == '-f' ]; then
     timestamp=$(date +%Y-%m-%d:%H-%M-%S)
-    maim -s > ~/$timestamp.png
+    name=$2
+    if [ -z "$name" ]; then
+        maim -s > ~/$timestamp.png
+    else
+        maim -s > ~/$timestamp\_$name.png
+    fi
 else
     # By default: store into clipboard
     maim -s -u | xclip -selection clipboard -t image/png -i

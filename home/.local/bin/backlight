@@ -5,7 +5,7 @@ if [ -z $OP ]; then
     exit 1
 fi
 
-DIFF=5
+DIFF=0
 
 CUR=$(xbacklight)
 CURINT=${CUR%.*}
@@ -18,6 +18,10 @@ elif [ $CURINT -le 10 ]; then
     DIFF=2
 elif [ $CURINT -le 20 ]; then
     DIFF=3
+elif [ $CURINT -le 50 ]; then
+    DIFF=5
+else
+    DIFF=10
 fi
 
 if [ $OP = '-' ]; then

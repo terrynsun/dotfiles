@@ -5,7 +5,7 @@
 [core]
     autocrlf = input
     whitespace=fix,trailing-space,cr-at-eol
-    excludesfile = /home/sun/.gitignore_global
+    excludesfile = ~/.gitignore_global
 
 [color]
     ui = always

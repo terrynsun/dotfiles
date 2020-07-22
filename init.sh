@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Oh My Zsh (copy of online install script)
+# Oh My Zsh
 if [ ! -d ~/.oh-my-zsh ]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 else
     echo oh-my-zsh already installed
 fi
@@ -25,12 +26,30 @@ else
     echo tpm already installed
 fi
 
+# Gnome-terminal: set solarized
+if [ ! -d gnome-terminal-colors-solarized ]; then
+    git clone https://github.com/aruhier/gnome-terminal-colors-solarized.git
+fi
+
+# Auto-install script
+cd gnome-terminal-colors-solarized
+echo "3
+1
+YES" | ./install.sh
+cd ..
+
 # Symlink all dotfiles
 cd home
+
+echo symlinking dotfiles...
 
 for f in $(ls -A); do
     # if file does not exist
     if [ ! -f ~/$f ] && [ ! -d ~/$f ]; then
+        echo ln -s $(pwd)/$f ~/$f
         ln -s $(pwd)/$f ~/$f
     fi
 done
+
+# Otherwise you'll forget
+xmodmap ~/.Xmodmap

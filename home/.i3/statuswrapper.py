@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # This script is a simple wrapper which prefixes each i3status line with custom
@@ -103,6 +103,7 @@ if __name__ == '__main__':
                     e['color'] = GREEN
             elif name == 'battery':
                 if text.startswith('charging'):
+                    #e['full_text'] = "🔌%s" % (text)
                     e['full_text'] = "🔌%s" % (text)
                     e['color'] = YELLOW
                 else: # 🗲

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-diff -y <(hexdump $1) <(hexdump $2)

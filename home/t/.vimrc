@@ -28,7 +28,7 @@ let g:lightline = {
 let g:ctrlp_max_files = 0
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug|bin)$',
+  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
   \ 'file': '\v\.(exe|so|dll|class|o)$',
   \ }
 
@@ -42,7 +42,7 @@ Plugin 'scrooloose/nerdtree'
 "------------
 " Display
 "------------
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 
 "------------
@@ -85,7 +85,7 @@ Plugin 'ervandew/supertab'
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_mode_map = {
 \   "mode": "active",
-\   "passive_filetypes": [ "scala", "python", "rust", "php" ]
+\   "passive_filetypes": [ "scala", "rust", "php" ]
 \   }
 let g:syntastic_always_populate_loc_list = 1
 
@@ -110,8 +110,8 @@ Plugin 'vim-scripts/a.vim'
 
 
 Plugin 'pangloss/vim-javascript'
-Plugin 'wookiehangover/jshint.vim'
-let JSHintUpdateWriteOnly=1
+"Plugin 'wookiehangover/jshint.vim'
+"let JSHintUpdateWriteOnly=1
 
 Plugin 'rust-lang/rust.vim'
 
@@ -205,7 +205,7 @@ endif
 
 syntax enable
 set background=light
-colorscheme solarized
+"colorscheme solarized
 
 " Misc
 autocmd BufNewFile,BufRead *.sage set filetype=python
@@ -219,9 +219,9 @@ autocmd BufEnter *.json set conceallevel=0
 
 " LaTeX
 " compile on save
-autocmd BufWritePost *.tex !pdflatex "<afile>"
-autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
-autocmd VimLeave *.tex !rm *.log *.aux
+"autocmd BufWritePost *.tex !pdflatex "<afile>"
+"autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+"autocmd VimLeave *.tex !rm *.log *.aux
 
 au FileType tex nnoremap j gj
 au FileType tex nnoremap k gk

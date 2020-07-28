@@ -5,5 +5,6 @@ redshift -l 37:-121 &
 nm-applet &
 blueman-applet &
 picom -b
-~/.local/bin/wallpaper
+
 export PATH=$PATH:$HOME/.local/bin
+wallpaper

@@ -37,19 +37,9 @@ echo "3
 1
 YES" | ./install.sh
 cd ..
+rm -rf gnome-terminal-colors-solarized
 
 # Symlink all dotfiles
-cd home
-
 echo symlinking dotfiles...
 
-for f in $(ls -A); do
-    # if file does not exist
-    if [ ! -f ~/$f ] && [ ! -d ~/$f ]; then
-        echo ln -s $(pwd)/$f ~/$f
-        ln -s $(pwd)/$f ~/$f
-    fi
-done
-
-# Otherwise you'll forget
-xmodmap ~/.Xmodmap
+./symlink.sh

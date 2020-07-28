@@ -46,9 +46,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 
 "------------
-" DVCS
+" git
 "------------
 Plugin 'airblade/vim-gitgutter'
+autocmd BufWritePost * GitGutter
 Plugin 'tpope/vim-fugitive'
 
 "------------
@@ -61,13 +62,9 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sleuth'            " try to automatically set tab length
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-speeddating'       " fix increment for dates
-Plugin 'tpope/vim-dispatch'
 
 " <Enter>
 Plugin 'junegunn/vim-easy-align'
-
-" TODO
-Plugin 'vim-scripts/ReplaceWithRegister'
 
 " select block and C-A or C-X
 Plugin 'triglav/vim-visual-increment'
@@ -75,31 +72,8 @@ Plugin 'triglav/vim-visual-increment'
 "------------
 " Syntax
 "------------
-" TODO
-Plugin 'dhruvasagar/vim-table-mode'
 
-Plugin 'scrooloose/syntastic'
-Plugin 'ervandew/supertab'
-
-" let g:syntastic_cpp_compiler = 'clang'
-" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_mode_map = {
-\   "mode": "active",
-\   "passive_filetypes": [ "scala", "rust", "php" ]
-\   }
-let g:syntastic_always_populate_loc_list = 1
-
-" Use deoplete.
-"Plugin 'Shougo/deoplete.nvim'
-"Plugin 'Shougo/neoinclude.vim'
-
-let g:deoplete#enable_at_startup = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-Plugin 'zchee/deoplete-clang'
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
-
-" Plugin 'Valloric/YouCompleteMe'
+"Plugin 'ervandew/supertab'
 
 "-------------------
 " Language-Specific
@@ -107,7 +81,6 @@ let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 
 " Use :A to switch .c <-> .h
 Plugin 'vim-scripts/a.vim'
-
 
 Plugin 'pangloss/vim-javascript'
 "Plugin 'wookiehangover/jshint.vim'
@@ -118,8 +91,8 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['rust']
 
-Plugin 'saltstack/salt-vim'
-Plugin 'chr4/nginx.vim'
+"Plugin 'saltstack/salt-vim'
+"Plugin 'chr4/nginx.vim'
 
 "Plugin 'lervag/vimtex'
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -227,17 +200,6 @@ au FileType tex nnoremap j gj
 au FileType tex nnoremap k gk
 autocmd BufEnter *.tex set tw=100 cc=100
 
-" Coq
-" autocmd VimEnter *.v CoqLaunch
-" au FileType coq hi CheckedByCoq ctermbg=189
-" au FileType coq hi SentToCoq ctermbg=188
-" au FileType coq nnoremap <C-j> :CoqNext<CR>
-" au FileType coq nnoremap <C-k> :CoqUndo<CR>
-" au FileType coq inoremap <C-j> <C-o>:CoqNext<CR>
-" au FileType coq inoremap <C-k> <C-o>:CoqUndo<CR>
-" au FileType coq nnoremap cq :CoqToCursor<CR>
-" au FileType coq nnoremap c/ :Coq SearchAbout .<Left>
-
 """""""""""""""""""""""""""""""" Custom remaps """""""""""""""""""""""""""""""
 " stop search highlighting
 nnoremap <space> :noh<cr>
@@ -251,17 +213,12 @@ map <F4> :SyntasticCheck<CR>
 " clear terminal screen
 map <F5> :!reset<CR><CR>
 
-map <F11> :Sex<CR>
 map <F12> :NERDTreeToggle<CR>
 
 vmap <Enter> <Plug>(EasyAlign)
 
 " tex: put selection in math mode
 xmap m S$
-
-if has('nvim')
-    nnoremap <Leader>m :rightbelow vertical split <bar> :term make<cr>
-endif
 
 """""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
 command W w

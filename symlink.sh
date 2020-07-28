@@ -19,6 +19,7 @@ for f in $files; do
 
     # If the target file doesn't exist (is neither file nor directory)
     if [ ! -f $target ] && [ ! -d $target ]; then
+        echo ln -s $(pwd)/$f $target
         ln -s $(pwd)/$f $target
     else
         echo "$target already exists"

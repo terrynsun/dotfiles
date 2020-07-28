@@ -1,0 +1,5 @@
+#!/bin/bash
+
+xmodmap ~/.Xmodmap
+wallpaper
+i3-msg [class=".*"] move workspace to output primary

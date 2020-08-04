@@ -145,6 +145,7 @@ bar {
     position top
     #status_command i3status | ~/.i3/statuswrapper.py
     status_command ~/.local/bin/conkybar | ~/.i3/statuswrapper.py
+    tray_output primary
     colors {
         # solarized
         background #073642

@@ -1,4 +1,5 @@
-# This script, along with .Xresources and .Xmodmap, are run by lxdm.
+# This script, along with .Xresources and .Xmodmap, are run by lxdm. (lxdm runs
+# .xsession.)
 
 ## Programs
 redshift -l 37:-121 &
@@ -8,3 +9,4 @@ picom -b
 
 export PATH=$PATH:$HOME/.local/bin
 wallpaper
+autorandr -c

@@ -19,13 +19,13 @@ for f in $files; do
     fi
 
     if [ ! -d $localdir ]; then
-        echo mkdir -p $localdir
+        echo \> mkdir -p $localdir
         mkdir -p $localdir
     fi
 
-    echo mv $f $localdir
+    echo \> mv $f $localdir
     mv $f $localdir
 
-    echo ln -s $new_full_path $f
+    echo \> ln -s $new_full_path $f
     ln -s $new_full_path $f
 done

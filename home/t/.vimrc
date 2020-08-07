@@ -42,7 +42,7 @@ Plugin 'scrooloose/nerdtree'
 "------------
 " Display
 "------------
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 
 "------------
@@ -178,7 +178,7 @@ endif
 
 syntax enable
 set background=light
-"colorscheme solarized
+colorscheme solarized
 
 " Misc
 autocmd BufNewFile,BufRead *.sage set filetype=python

@@ -46,7 +46,7 @@ fi
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
+export PATH=$PATH:$HOME/.cargo/bin
 
 export EDITOR=vim
 

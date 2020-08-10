@@ -63,8 +63,8 @@ Plugin 'tpope/vim-sleuth'            " try to automatically set tab length
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-speeddating'       " fix increment for dates
 
-" <Enter>
 Plugin 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
 
 " select block and C-A or C-X
 Plugin 'triglav/vim-visual-increment'
@@ -72,8 +72,15 @@ Plugin 'triglav/vim-visual-increment'
 "------------
 " Syntax
 "------------
+Plugin 'ervandew/supertab'
 
-"Plugin 'ervandew/supertab'
+Plugin 'dense-analysis/ale'
+let g:ale_linters = {'rust': ['analyzer']}
+" Lint on save only
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+
+let g:airline#extensions#ale#enabled = 1
 
 "-------------------
 " Language-Specific
@@ -109,7 +116,6 @@ let g:markdown_fenced_languages = ['rust']
 " Ocaml-Merlin
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
-" let g:syntastic_ocaml_checkers = ['merlin']
 
 call vundle#end()
 filetype plugin indent on
@@ -202,20 +208,21 @@ autocmd BufEnter *.tex set tw=100 cc=100
 
 """""""""""""""""""""""""""""""" Custom remaps """""""""""""""""""""""""""""""
 " stop search highlighting
-nnoremap <space> :noh<cr>
+nnoremap <space> :noh<CR>
 " enter newline
 nnoremap <CR> o<ESC>k
 
 map <F2> :Gblame<CR>
 map <F3> :UndotreeToggle<CR>
-map <F4> :SyntasticCheck<CR>
+
+map <C-]> <Plug>(ale_go_to_definition)
+map <C-[> :ALEGoToDefinition -split<CR>
+map <Leader>q :ALEHover<CR>
 
 " clear terminal screen
 map <F5> :!reset<CR><CR>
 
 map <F12> :NERDTreeToggle<CR>
-
-vmap <Enter> <Plug>(EasyAlign)
 
 " tex: put selection in math mode
 xmap m S$

@@ -21,7 +21,8 @@ let g:lightline = {
   \   },
   \   'component': {
   \     'readonly': '%{&readonly?"x":""}',
-  \     'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+  \     'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+  \     'filename': '%f'
   \   }
   \ }
 
@@ -51,6 +52,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
 autocmd BufWritePost * GitGutter
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb' " GBrowse handler for GH
 
 "------------
 " Utilities
@@ -116,6 +118,9 @@ let g:markdown_fenced_languages = ['rust']
 " Ocaml-Merlin
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+Plugin 'google/vim-jsonnet'
+Plugin 'pearofducks/ansible-vim'
 
 call vundle#end()
 filetype plugin indent on

@@ -16,10 +16,5 @@ alias mc='make clean'
 alias vundle='vim +PluginInstall +qall'
 alias vi='/usr/bin/vim'
 #alias vim='nvim'
-alias emacs='emacs -nw' # no-window option
-
-### Keyboard
-alias aoeu='if [ $DISPLAY ]; then setxkbmap us; else loadkeys us; fi; xmodmap ~/.Xmodmap'
-alias asdf='if [ $DISPLAY ]; then setxkbmap dvorak; else loadkeys dvp; fi; xmodmap ~/.Xmodmap'
 
 alias lua='rlwrap luajit'

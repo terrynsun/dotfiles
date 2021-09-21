@@ -1,0 +1,16 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "workbench.startupEditor": "welcomePage",
+    "go.toolsManagement.autoUpdate": true,
+    "window.zoomLevel": -1,
+    "rust-analyzer.inlayHints.enable": false,
+    "rust-analyzer.completion.addCallParenthesis": false,
+    "vim.useSystemClipboard": true,
+    "files.insertFinalNewline": true,
+    "editor.minimap.enabled": false,
+    "editor.autoClosingBrackets": "never",
+    "editor.formatOnSave": true,
+    "editor.wordWrapColumn": 120
+}

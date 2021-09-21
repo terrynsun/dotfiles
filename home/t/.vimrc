@@ -13,25 +13,61 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'itchyny/lightline.vim'
+Plugin 'maximbaz/lightline-ale'
+
+let g:lightline#ale#indicator_checking = '...'
 let g:lightline = {
   \   'colorscheme': 'solarized',
   \   'active': {
-  \     'left': [ [ 'mode', 'paste' ],
-  \               [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+  \     'left':  [ [ 'mode', 'paste' ],
+  \                [ 'gitbranch', 'gitpath',
+  \                  'readonly', 'modified' ] ],
+  \     'right': [ [ 'ale_expand', 'ale_errors', 'ale_warnings', 'ale_infos', 'ale_ok' ],
+  \              [ 'lineinfo', 'percent' ],
+  \              [ 'fileformat', 'fileencoding', 'filetype'] ]
   \   },
   \   'component': {
   \     'readonly': '%{&readonly?"x":""}',
-  \     'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-  \     'filename': '%f'
-  \   }
+  \   },
+  \   'component_expand': {
+  \     'gitbranch':    'FugitiveHead',
+  \     'gitpath':      'LightlineRepoPath',
+  \     'ale_expand':   'lightline#ale#checking',
+  \     'ale_infos':    'lightline#ale#infos',
+  \     'ale_warnings': 'lightline#ale#warnings',
+  \     'ale_errors':   'lightline#ale#errors',
+  \     'ale_ok':       'lightline#ale#ok',
+  \   },
+  \   'component_type': {
+  \     'ale_checking': 'right',
+  \     'ale_infos':    'right',
+  \     'ale_warnings': 'warning',
+  \     'ale_errors':   'error',
+  \     'ale_ok':       'green',
+  \   },
   \ }
 
-let g:ctrlp_max_files = 0
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
-  \ 'file': '\v\.(exe|so|dll|class|o)$',
-  \ }
+function! LightlineRepoPath()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+"let g:ctrlp_max_files = 0
+"let g:ctrlp_clear_cache_on_exit = 0
+"Plugin 'ctrlpvim/ctrlp.vim'
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
+"  \ 'file': '\v\.(exe|so|dll|class|o)$',
+"  \ }
+
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
 " <F3>
 Plugin 'mbbill/undotree'
@@ -51,6 +87,7 @@ Plugin 'Yggdroot/indentLine'
 "------------
 Plugin 'airblade/vim-gitgutter'
 autocmd BufWritePost * GitGutter
+autocmd BufEnter * GitGutter
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb' " GBrowse handler for GH
 
@@ -77,12 +114,19 @@ Plugin 'triglav/vim-visual-increment'
 Plugin 'ervandew/supertab'
 
 Plugin 'dense-analysis/ale'
-let g:ale_linters = {'rust': ['analyzer']}
-" Lint on save only
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
+let g:ale_linters = { 'rust': ['analyzer'], 'ruby': ['rubocop']}
+let g:ale_completion_enabled = 1
+let g:ale_set_balloons = 1 " doesn't work in neovim unfortunately
+"let g:ale_cursor_detail = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+
+let g:ale_proto_protoc_gen_lint_options = '-I ~/src/schema.protobuf/proto/ -I ~/src/schema.protobuf/deps/'
+
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 "-------------------
 " Language-Specific
@@ -97,8 +141,16 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'rust-lang/rust.vim'
 
-Plugin 'tpope/vim-markdown'
-let g:markdown_fenced_languages = ['rust']
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+let g:conceallevel = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+Plugin 'cespare/vim-toml'
+
+"Plugin 'tpope/vim-markdown'
+"let g:markdown_fenced_languages = ['rust']
+"let g:markdown_syntax_conceal = 0
 
 "Plugin 'saltstack/salt-vim'
 "Plugin 'chr4/nginx.vim'
@@ -110,7 +162,6 @@ let g:markdown_fenced_languages = ['rust']
 "Plugin 'def-lkb/vimbufsync'
 "Plugin 'the-lambda-church/coquille'
 
-"Plugin 'vim-ruby/vim-ruby'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'eagletmt/ghc-mod'
 "Plugin 'digitaltoad/vim-jade'
@@ -119,15 +170,34 @@ let g:markdown_fenced_languages = ['rust']
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'uarun/vim-protobuf'
+Plugin 'cstrahan/vim-capnp'
+
+Plugin 'leafgarland/typescript-vim'
 Plugin 'google/vim-jsonnet'
 Plugin 'pearofducks/ansible-vim'
 
+Plugin 'fatih/vim-go'
+let g:go_fmt_fail_silently = 1
+let g:go_def_mapping_enabled = 0
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+
 call vundle#end()
 filetype plugin indent on
-
-"-------------------
-" Lightline Config
-"-------------------
 
 set lazyredraw
 set laststatus=2
@@ -185,13 +255,19 @@ if has('nvim')
     set ttimeoutlen=-1
 endif
 
-""""""""""""""""""""""""""""" Filetype Settings """"""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Colorscheme """"""""""""""""""""""""""""""""""
 
 syntax enable
 set background=light
 colorscheme solarized
 
-" Misc
+highlight SignColumn      ctermbg=none
+highlight GitGutterAdd    ctermbg=none
+highlight GitGutterChange ctermbg=none
+highlight GitGutterDelete ctermbg=none
+
+""""""""""""""""""""""""""""" Filetype Settings """"""""""""""""""""""""""""""
+
 autocmd BufNewFile,BufRead *.sage set filetype=python
 
 autocmd BufEnter,BufNewFile *.rs set cc=101
@@ -211,26 +287,30 @@ au FileType tex nnoremap j gj
 au FileType tex nnoremap k gk
 autocmd BufEnter *.tex set tw=100 cc=100
 
-"""""""""""""""""""""""""""""""" Custom remaps """""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""" Function keys """""""""""""""""""""""""""""""
+
+map <F2> :Git blame<CR>
+map <F3> :UndotreeToggle<CR>
+set pastetoggle=<F4>
+map <F5> :!reset<CR><CR>
+
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
+map <F12> :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
+command W w
+
 " stop search highlighting
 nnoremap <space> :noh<CR>
 " enter newline
 nnoremap <CR> o<ESC>k
 
-map <F2> :Gblame<CR>
-map <F3> :UndotreeToggle<CR>
-
 map <C-]> <Plug>(ale_go_to_definition)
-map <C-[> :ALEGoToDefinition -split<CR>
 map <Leader>q :ALEHover<CR>
-
-" clear terminal screen
-map <F5> :!reset<CR><CR>
-
-map <F12> :NERDTreeToggle<CR>
 
 " tex: put selection in math mode
 xmap m S$
-
-"""""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
-command W w

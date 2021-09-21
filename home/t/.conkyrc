@@ -19,7 +19,7 @@ conky.config = {
   -- How strict should if_up be when testing an interface for being up?
   -- The value is one of up, link or address, to check for the interface
   -- being solely up, being up and having link or being up, having link
-  -- and an assigned IP address. 
+  -- and an assigned IP address.
   if_up_strictness = 'address',
 
   -- Add spaces to keep things from moving about?  This only affects certain objects.
@@ -63,7 +63,7 @@ conky.text = [[
     , "color": ${if_match ${memperc}<50} "\#93a1a1" ${else} ${if_match ${memperc}<75} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
     },
     {
-      "full_text": "🌡${acpitemp}°C"
+      "full_text": "🌡 ${acpitemp}°C"
     , "color": ${if_match ${acpitemp}<50} "\#93a1a1" ${else} ${if_match ${acpitemp}<65} "\#cb4b16" ${else} "\#dc322f" ${endif} ${endif}
     },
     {

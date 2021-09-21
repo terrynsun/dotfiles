@@ -148,10 +148,6 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 Plugin 'cespare/vim-toml'
 
-"Plugin 'tpope/vim-markdown'
-"let g:markdown_fenced_languages = ['rust']
-"let g:markdown_syntax_conceal = 0
-
 "Plugin 'saltstack/salt-vim'
 "Plugin 'chr4/nginx.vim'
 

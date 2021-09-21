@@ -142,6 +142,7 @@ client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
 client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
 
 bar {
+    font pango:DejaVu Sans Book 9
     position top
     #status_command i3status | ~/.i3/statuswrapper.py
     status_command ~/.local/bin/conkybar | ~/.i3/statuswrapper.py

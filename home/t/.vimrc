@@ -195,6 +195,22 @@ let g:go_highlight_variable_assignments = 1
 call vundle#end()
 filetype plugin indent on
 
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-a>"] = false,
+      },
+    },
+  }
+}
+EOF
+
 set lazyredraw
 set laststatus=2
 set noshowmode

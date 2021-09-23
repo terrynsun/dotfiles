@@ -113,20 +113,24 @@ Plugin 'triglav/vim-visual-increment'
 "------------
 Plugin 'ervandew/supertab'
 
-Plugin 'dense-analysis/ale'
-let g:ale_linters = { 'rust': ['analyzer'], 'ruby': ['rubocop']}
-let g:ale_completion_enabled = 1
-let g:ale_set_balloons = 1 " doesn't work in neovim unfortunately
-"let g:ale_cursor_detail = 1
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+Plugin 'neovim/nvim-lspconfig'
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-
-let g:ale_proto_protoc_gen_lint_options = '-I ~/src/schema.protobuf/proto/ -I ~/src/schema.protobuf/deps/'
-
-let g:ale_ruby_rubocop_executable = 'bundle'
+"Plugin 'dense-analysis/ale'
+"let g:ale_linters = {
+"    \ 'rust': ['analyzer']
+"  \ }
+"let g:ale_fixers = { 'rust': ['rustfmt'] }
+"let g:ale_completion_enabled = 1
+"let g:ale_set_balloons = 1 " doesn't work in neovim unfortunately
+""let g:ale_cursor_detail = 1
+"
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_insert_leave = 1
+"let g:ale_fix_on_save = 1
+"
+"let g:ale_proto_protoc_gen_lint_options = '-I ~/src/schema.protobuf/proto/ -I ~/src/schema.protobuf/deps/'
+"
+"let g:ale_ruby_rubocop_executable = 'bundle'
 
 "-------------------
 " Language-Specific
@@ -209,6 +213,39 @@ require('telescope').setup{
     },
   }
 }
+
+require('lspconfig').rust_analyzer.setup({})
+-- require('lspconfig').pyright.setup({})
+
+local nvim_lsp = require('lspconfig')
+
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+
 EOF
 
 set lazyredraw
@@ -317,12 +354,12 @@ map <F12> :NERDTreeToggle<CR>
 command W w
 
 " stop search highlighting
-nnoremap <space> :noh<CR>
+nnoremap <space><space> :noh<CR>
 " enter newline
 nnoremap <CR> o<ESC>k
 
-map <C-]> <Plug>(ale_go_to_definition)
-map <Leader>q :ALEHover<CR>
+" map <C-]> <Plug>(ale_go_to_definition)
+" map <Leader>q :ALEHover<CR>
 
 " tex: put selection in math mode
 xmap m S$

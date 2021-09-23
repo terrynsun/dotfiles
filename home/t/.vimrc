@@ -2,28 +2,31 @@ set nocompatible
 filetype off
 
 """"""""""""""""""""""""""""""""""" Plugins """"""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/Vundle.vim
 set shell=/bin/bash
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
 
-"------------
-" Navigation
-"------------
-Plugin 'christoomey/vim-tmux-navigator'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'itchyny/lightline.vim'
-Plugin 'maximbaz/lightline-ale'
+call plug#begin('~/.vim/plugged')
+"---------------------
+" Navigation & Display
+"---------------------
+Plug 'altercation/vim-colors-solarized'
+Plug 'Yggdroot/indentLine'
+Plug 'christoomey/vim-tmux-navigator'
 
-let g:lightline#ale#indicator_checking = '...'
+Plug 'itchyny/lightline.vim'
+
 let g:lightline = {
   \   'colorscheme': 'solarized',
   \   'active': {
   \     'left':  [ [ 'mode', 'paste' ],
   \                [ 'gitbranch', 'gitpath',
   \                  'readonly', 'modified' ] ],
-  \     'right': [ [ 'ale_expand', 'ale_errors', 'ale_warnings', 'ale_infos', 'ale_ok' ],
-  \              [ 'lineinfo', 'percent' ],
+  \     'right': [ [ 'lineinfo', 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype'] ]
   \   },
   \   'component': {
@@ -32,19 +35,7 @@ let g:lightline = {
   \   'component_expand': {
   \     'gitbranch':    'FugitiveHead',
   \     'gitpath':      'LightlineRepoPath',
-  \     'ale_expand':   'lightline#ale#checking',
-  \     'ale_infos':    'lightline#ale#infos',
-  \     'ale_warnings': 'lightline#ale#warnings',
-  \     'ale_errors':   'lightline#ale#errors',
-  \     'ale_ok':       'lightline#ale#ok',
-  \   },
-  \   'component_type': {
-  \     'ale_checking': 'right',
-  \     'ale_infos':    'right',
-  \     'ale_warnings': 'warning',
-  \     'ale_errors':   'error',
-  \     'ale_ok':       'green',
-  \   },
+  \   }
   \ }
 
 function! LightlineRepoPath()
@@ -56,130 +47,113 @@ function! LightlineRepoPath()
   return expand('%')
 endfunction
 
-"let g:ctrlp_max_files = 0
-"let g:ctrlp_clear_cache_on_exit = 0
-"Plugin 'ctrlpvim/ctrlp.vim'
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
-"  \ 'file': '\v\.(exe|so|dll|class|o)$',
-"  \ }
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 
-Plugin 'nvim-lua/plenary.nvim'
-Plugin 'nvim-telescope/telescope.nvim'
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <C-p> <cmd>Telescope find_files<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+else
+  Plug 'ctrlpvim/ctrlp.vim'
+
+  let g:ctrlp_max_files = 0
+  let g:ctrlp_clear_cache_on_exit = 0
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](_site|\.(git|hg|svn|bin|build|_build)|build|cmake-build-debug)$',
+    \ 'file': '\v\.(exe|so|dll|class|o)$',
+    \ }
+endif
 
 " <F3>
-Plugin 'mbbill/undotree'
+Plug 'mbbill/undotree'
 let g:undotree_HighlightChangedText = 0
 
 " <F12>
-Plugin 'scrooloose/nerdtree'
-
-"------------
-" Display
-"------------
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree'
 
 "------------
 " git
 "------------
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 autocmd BufWritePost * GitGutter
 autocmd BufEnter * GitGutter
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb' " GBrowse handler for GH
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " GBrowse handler for GH
 
 "------------
 " Utilities
 "------------
-runtime! Plugin 'tpope/vim-sensible' " load early so I can override settings
+runtime! Plug 'tpope/vim-sensible' " load early so I can override settings
 
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sleuth'            " try to automatically set tab length
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-speeddating'       " fix increment for dates
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sleuth'            " try to automatically set tab length
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-speeddating'       " fix increment for dates
 
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 
 " select block and C-A or C-X
-Plugin 'triglav/vim-visual-increment'
+Plug 'triglav/vim-visual-increment'
 
 "------------
 " Syntax
 "------------
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
-Plugin 'neovim/nvim-lspconfig'
-
-"Plugin 'dense-analysis/ale'
-"let g:ale_linters = {
-"    \ 'rust': ['analyzer']
-"  \ }
-"let g:ale_fixers = { 'rust': ['rustfmt'] }
-"let g:ale_completion_enabled = 1
-"let g:ale_set_balloons = 1 " doesn't work in neovim unfortunately
-""let g:ale_cursor_detail = 1
-"
-"let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_insert_leave = 1
-"let g:ale_fix_on_save = 1
-"
-"let g:ale_proto_protoc_gen_lint_options = '-I ~/src/schema.protobuf/proto/ -I ~/src/schema.protobuf/deps/'
-"
-"let g:ale_ruby_rubocop_executable = 'bundle'
+if has('nvim')
+  Plug 'neovim/nvim-lspconfig'
+end
 
 "-------------------
 " Language-Specific
 "-------------------
 
 " Use :A to switch .c <-> .h
-Plugin 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
 
-Plugin 'pangloss/vim-javascript'
-"Plugin 'wookiehangover/jshint.vim'
+Plug 'pangloss/vim-javascript'
+"Plug 'wookiehangover/jshint.vim'
 "let JSHintUpdateWriteOnly=1
 
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 let g:conceallevel = 0
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 
-"Plugin 'saltstack/salt-vim'
-"Plugin 'chr4/nginx.vim'
+"Plug 'saltstack/salt-vim'
+"Plug 'chr4/nginx.vim'
 
-"Plugin 'lervag/vimtex'
-"Plugin 'octol/vim-cpp-enhanced-highlight'
-"Plugin 'beyondmarc/glsl.vim'
+"Plug 'lervag/vimtex'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'beyondmarc/glsl.vim'
 
-"Plugin 'def-lkb/vimbufsync'
-"Plugin 'the-lambda-church/coquille'
+"Plug 'def-lkb/vimbufsync'
+"Plug 'the-lambda-church/coquille'
 
-"Plugin 'derekwyatt/vim-scala'
-"Plugin 'eagletmt/ghc-mod'
-"Plugin 'digitaltoad/vim-jade'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'eagletmt/ghc-mod'
+"Plug 'digitaltoad/vim-jade'
 
 " Ocaml-Merlin
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'uarun/vim-protobuf'
-Plugin 'cstrahan/vim-capnp'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'uarun/vim-protobuf'
+Plug 'cstrahan/vim-capnp'
 
-Plugin 'leafgarland/typescript-vim'
-Plugin 'google/vim-jsonnet'
-Plugin 'pearofducks/ansible-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'google/vim-jsonnet'
+Plug 'pearofducks/ansible-vim'
 
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 let g:go_fmt_fail_silently = 1
 let g:go_def_mapping_enabled = 0
 
@@ -196,68 +170,67 @@ let g:go_highlight_types = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
+" Lua config must run after plug#end has loaded plugins:
+if has('nvim')
 lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup{
-  defaults = {
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close,
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-a>"] = false,
+  local actions = require('telescope.actions')
+  require('telescope').setup{
+    defaults = {
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close,
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-a>"] = false,
+        },
       },
-    },
-  }
-}
-
-require('lspconfig').rust_analyzer.setup({})
--- require('lspconfig').pyright.setup({})
-
-local nvim_lsp = require('lspconfig')
-
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
     }
   }
-end
+
+  local nvim_lsp = require('lspconfig')
+
+  local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+
+  -- Use a loop to conveniently call 'setup' on multiple servers and
+  -- map buffer local keybindings when the language server attaches
+  local servers = { 'pyright', 'rust_analyzer', 'gopls' }
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      }
+    }
+  end
 
 EOF
+end
+
+"""""""""""""""""""""""""""" General Vim Settings """"""""""""""""""""""""""""
 
 set lazyredraw
 set laststatus=2
 set noshowmode
 
-"""""""""""""""""""""""""""" General Vim Settings """"""""""""""""""""""""""""
-
 set ruler
 set showcmd
 
-" Tab stuff
+" Tabs
 set autoindent smartindent         " copy indent to nl; autoindent on nl
 set expandtab smarttab             " tabs set to spaces; backspace by tabstop
 set ts=4 sw=4 sts=4                " tab lengths - default 4 [usually overriden]
@@ -352,14 +325,12 @@ map <F12> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
 command W w
+command Wq wq
 
 " stop search highlighting
 nnoremap <space><space> :noh<CR>
 " enter newline
 nnoremap <CR> o<ESC>k
-
-" map <C-]> <Plug>(ale_go_to_definition)
-" map <Leader>q :ALEHover<CR>
 
 " tex: put selection in math mode
 xmap m S$

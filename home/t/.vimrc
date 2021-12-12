@@ -14,7 +14,9 @@ call plug#begin('~/.vim/plugged')
 "---------------------
 " Navigation & Display
 "---------------------
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+" Plug 'overcache/NeoSolarized'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -49,6 +51,7 @@ endfunction
 
 if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/popup.nvim' " todo what is this for?
   Plug 'nvim-telescope/telescope.nvim'
 
   nnoremap <C-p> <cmd>Telescope find_files<cr>
@@ -104,6 +107,10 @@ Plug 'ervandew/supertab'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
+  Plug 'kosayoda/nvim-lightbulb'
+
+  "Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
 end
 
 "-------------------
@@ -176,6 +183,12 @@ filetype plugin indent on
 " Lua config must run after plug#end has loaded plugins:
 if has('nvim')
 lua << EOF
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- delay update diagnostics
+      update_in_insert = false,
+    }
+  )
   local actions = require('telescope.actions')
   require('telescope').setup{
     defaults = {
@@ -201,14 +214,18 @@ lua << EOF
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', '<leader>t', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
   end
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'pyright', 'rust_analyzer', 'gopls' }
+  local servers = { 'rust_analyzer', 'gopls', 'solargraph' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
@@ -218,8 +235,27 @@ lua << EOF
     }
   end
 
+  require("trouble").setup {
+    icons = false,
+    fold_open = "v", -- icon used for open folds
+    fold_closed = ">", -- icon used for closed folds
+    indent_lines = false, -- add an indent guide below the fold icons
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "error",
+        warning = "warn",
+        hint = "hint",
+        information = "info"
+    },
+    use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+    auto_preview = false,
+    auto_jump = { }
+  }
 EOF
 end
+
+autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()
+set updatetime=500
 
 """""""""""""""""""""""""""" General Vim Settings """"""""""""""""""""""""""""
 
@@ -281,7 +317,8 @@ endif
 
 syntax enable
 set background=light
-colorscheme solarized
+set termguicolors " truecolor suport
+colorscheme solarized8
 
 highlight SignColumn      ctermbg=none
 highlight GitGutterAdd    ctermbg=none

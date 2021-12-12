@@ -13,7 +13,7 @@ alias mt='make test'
 alias mc='make clean'
 
 ### Editors
-alias vundle='vim +PluginInstall +qall'
+alias vimplug='vim +PlugInstall +qall'
 alias vi='/usr/bin/vim'
 #alias vim='nvim'
 

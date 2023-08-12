@@ -29,6 +29,9 @@ autoload -Uz promptinit
 promptinit
 prompt walters
 
+# Print % at non-\n terminated lines. This is the default and walters unsets it.
+unsetopt nopromptsp
+
 # Print git branch in right prompt
 setopt PROMPT_SUBST
 rprompt() {
@@ -44,12 +47,14 @@ fi
 
 ### Set path
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/usr/bin/core_perl
+export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:/home/t/.linkerd2/bin
+#export PATH=$PATH:/usr/bin
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # Dircolors from gnome-terminal-colors-solarized
 if [ -f ~/.dir_colors/dircolors ]; then

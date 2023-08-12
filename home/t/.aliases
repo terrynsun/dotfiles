@@ -13,8 +13,8 @@ alias mt='make test'
 alias mc='make clean'
 
 ### Editors
-alias vimplug='vim +PlugInstall +qall'
+alias vimplug='vim +PlugInstall +qall && vim +PlugUpdate +qall'
 alias vi='/usr/bin/vim'
-#alias vim='nvim'
+alias vim='nvim'
 
 alias lua='rlwrap luajit'

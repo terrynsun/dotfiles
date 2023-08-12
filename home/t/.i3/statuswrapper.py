@@ -103,7 +103,6 @@ if __name__ == '__main__':
                     e['color'] = GREEN
             elif name == 'battery':
                 if text.startswith('charging'):
-                    #e['full_text'] = "🔌%s" % (text)
                     e['full_text'] = "🔌%s" % (text)
                     e['color'] = YELLOW
                 else: # 🗲

@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 arg=$1
-if [ $arg = '-f' ]; then
+if [[ $arg = '-f' ]]; then
     timestamp=$(date +%Y-%m-%d:%H-%M-%S)
     name=$2
     if [ -z "$name" ]; then

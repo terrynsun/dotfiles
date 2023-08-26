@@ -16,6 +16,9 @@ CASE_SENSITIVE="false"
 # No incremental append for history
 unsetopt INC_APPEND_HISTORY
 
+# Print % at non-\n terminated lines. This is the default and walters unsets it.
+unsetopt nopromptsp
+
 # Autocompletion
 autoload -U compinit
 ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
@@ -49,7 +52,7 @@ export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/go/bin
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # Dircolors from gnome-terminal-colors-solarized
 if [ -f ~/.dir_colors/dircolors ]; then

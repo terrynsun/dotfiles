@@ -82,7 +82,10 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exit
+#bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec mate-session-save --logout-dialog
+
+bindsym $mod+Shift+s exec sshot
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -104,10 +107,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ################################ Custom Action #################################
-
-# go-to-sleep things
-bindsym $mod+Shift+s exec i3lockcolor && pm-suspend
-bindsym $mod+Shift+p exec i3lockcolor
 
 # bind mixer volume keys
 bindsym XF86AudioMute        exec "pamixer --toggle-mute && killall -USR1 conky"
@@ -137,27 +136,15 @@ bindsym $mod+Tab workspace back_and_forth
 ################################ Color & Style #################################
 
 # class                 border  backgr. text    indicator
-client.focused          #859900 #859900 #fdf6e3 #2e9ef4
+#                               cyan    base3
+client.focused          #2aa198 #2aa198 #fdf6e3 #2e9ef4
+#                               blue    base3
 client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
-client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
-
-bar {
-    font pango:DejaVu Sans Book 9
-    position top
-    #status_command i3status | ~/.i3/statuswrapper.py
-    status_command ~/.local/bin/conkybar | ~/.i3/statuswrapper.py
-    tray_output primary
-    colors {
-        # solarized
-        background #073642
-        statusline #eee8d5
-        focused_workspace #cb4b16 #cb4b16 #eee8d5
-        active_workspace #cb4b16 #cb4b16 #eee8d5
-        inactive_workspace #b58900 #b58900 #eee8d5
-    }
-}
+#                               base01  base3
+client.unfocused        #2aa198 #93a1a1 #fdf6e3 #292d2e
 
 # On startup
 exec keepassxc
 
 assign [class="KeePassXC"] 10
+assign [class="Pavucontrol"] 10

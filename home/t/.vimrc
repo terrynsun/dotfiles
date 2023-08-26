@@ -4,13 +4,13 @@ filetype off
 """"""""""""""""""""""""""""""""""" Plugins """"""""""""""""""""""""""""""""""""
 set shell=/bin/bash
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 "---------------------
 " Navigation & Display
 "---------------------
@@ -254,8 +254,11 @@ lua << EOF
 EOF
 end
 
-autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()
-set updatetime=500
+if has('nvim')
+  " todo check if lightbulb installed
+  autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()
+  set updatetime=500
+end
 
 """""""""""""""""""""""""""" General Vim Settings """"""""""""""""""""""""""""
 
@@ -365,7 +368,7 @@ command W w
 command Wq wq
 
 " stop search highlighting
-nnoremap <space><space> :noh<CR>
+nnoremap <space> :noh<CR>
 " enter newline
 nnoremap <CR> o<ESC>k
 

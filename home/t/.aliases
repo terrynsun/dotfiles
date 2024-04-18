@@ -18,3 +18,5 @@ alias vi='/usr/bin/vim'
 alias vim='nvim'
 
 alias lua='rlwrap luajit'
+alias rails-console='~/src/OneSignal/script/k8s_console'
+alias infra-cli='~/src/infra/script/infra-cli'

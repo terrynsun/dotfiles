@@ -53,6 +53,7 @@ if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/popup.nvim' " todo what is this for?
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'sharkdp/fd'
 
   nnoremap <C-p> <cmd>Telescope find_files<cr>
   nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -82,6 +83,7 @@ autocmd BufWritePost * GitGutter
 autocmd BufEnter * GitGutter
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " GBrowse handler for GH
+let g:netrw_browsex_viewer = "xdg-open"
 
 "------------
 " Utilities
@@ -159,6 +161,7 @@ Plug 'cstrahan/vim-capnp'
 Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-jsonnet'
 Plug 'pearofducks/ansible-vim'
+Plug 'hashivim/vim-terraform'
 
 Plug 'fatih/vim-go'
 let g:go_fmt_fail_silently = 1
@@ -203,7 +206,7 @@ lua << EOF
     }
   }
 
-  local nvim_lsp = require('lspconfig')
+  local lspconfig = require('lspconfig')
 
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -218,8 +221,8 @@ lua << EOF
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     buf_set_keymap('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
   end
 
@@ -227,13 +230,18 @@ lua << EOF
   -- map buffer local keybindings when the language server attaches
   local servers = { 'rust_analyzer', 'gopls', 'solargraph' }
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    lspconfig[lsp].setup {
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
       }
     }
   end
+
+  lspconfig.tsserver.setup {
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    cmd = { "typescript-language-server", "--stdio" }
+  }
 
   require("trouble").setup {
     icons = false,

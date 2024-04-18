@@ -16,9 +16,6 @@ CASE_SENSITIVE="false"
 # No incremental append for history
 unsetopt INC_APPEND_HISTORY
 
-# Print % at non-\n terminated lines. This is the default and walters unsets it.
-unsetopt nopromptsp
-
 # Autocompletion
 autoload -U compinit
 ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
@@ -31,6 +28,9 @@ setopt completealiases
 autoload -Uz promptinit
 promptinit
 prompt walters
+
+# Print % at non-\n terminated lines. This is the default and walters unsets it.
+unsetopt nopromptsp
 
 # Print git branch in right prompt
 setopt PROMPT_SUBST
@@ -47,10 +47,12 @@ fi
 
 ### Set path
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/bin/core_perl
+export PATH=$PATH:/usr/local/bin/go/bin
 
 export EDITOR=nvim
 
@@ -74,3 +76,15 @@ fi
 if [[ -z $(tmux list-sessions | grep attached) ]]; then
   tmux kill-session -a
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

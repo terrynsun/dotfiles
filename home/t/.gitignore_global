@@ -7,3 +7,6 @@
 Session.vim
 .netrwhist
 *~
+
+docker-compose.override.yml
+foo

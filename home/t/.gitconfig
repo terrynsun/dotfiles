@@ -1,5 +1,5 @@
 [user]
-    email = terrynsun@gmail.com
+    email = terry@onesignal.com
     name = Terry Sun
 
 [core]
@@ -32,3 +32,9 @@
     st = !git --no-pager log -1 --oneline && git status -sb
     update = !git add -u && git commit -am 'update'
     updateamend = !git add -u && git commit --amend --no-edit
+
+[init]
+    defaultBranch = main
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/

@@ -1,8 +1,16 @@
 #!/bin/bash
 
 xmodmap ~/.Xmodmap
-wallpaper
+
+xinput map-to-output \
+    $(xsetwacom list devices | grep -Eo 'id: .*type: STYLUS' | awk '{print $2}') \
+    $(xrandr | awk '/ primary / {print $1}')
+
+# wallpaper
+
 i3-msg '[class=".*"]' move workspace to output primary
-i3-msg '[workspace="0"]' move workspace to output eDP1
-i3-msg '[class="Google-chrome"]' focus
-i3-msg '[class="Firefox"]' focus
+i3-msg '[workspace="9"]' move workspace to output eDP-1
+i3-msg '[workspace="0"]' move workspace to output eDP-1
+# i3-msg '[class="Google-chrome"]' focus
+
+polybar-multi

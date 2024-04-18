@@ -148,3 +148,9 @@ exec keepassxc
 
 assign [class="KeePassXC"] 10
 assign [class="Pavucontrol"] 10
+
+bindsym $mod+a exec mute-zoom
+bindsym $mod+Shift+z exec killall zoom
+assign [class="zoom"] 9
+assign [class="zoom "] 9
+assign [class="join.*"] 9

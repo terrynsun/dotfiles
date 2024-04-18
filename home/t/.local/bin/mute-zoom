@@ -1,0 +1,5 @@
+#!/bin/sh
+
+i3-msg '[class="zoom"] focus'
+sleep 0.1
+xdotool key -clearmodifiers "alt+a" >> ~/.log

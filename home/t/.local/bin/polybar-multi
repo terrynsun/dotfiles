@@ -1,0 +1,12 @@
+#!/bin/sh
+
+polybar-msg cmd quit
+
+PRIMARY=$(xrandr | grep " connected " | grep primary | cut -f1 -d' ')
+MONITOR=$PRIMARY polybar primary -r &
+
+SECONDARIES=$(xrandr | grep " connected " | grep -v primary | cut -f1 -d' ')
+
+for M in $SECONDARIES; do
+    MONITOR=$M polybar secondary -r &
+done

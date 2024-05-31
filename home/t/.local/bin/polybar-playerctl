@@ -1,0 +1,11 @@
+#!/bin/bash
+
+STATUS=$(playerctl status)
+if [[ $STATUS == "Playing" ]]; then
+    SONG=$(playerctl metadata \
+        | grep --color=never 'title' \
+        | sed -E 's/.*title +//')
+    echo $SONG
+else
+    echo $STATUS
+fi

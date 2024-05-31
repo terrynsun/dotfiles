@@ -32,3 +32,6 @@
     st = !git --no-pager log -1 --oneline && git status -sb
     update = !git add -u && git commit -am 'update'
     updateamend = !git add -u && git commit --amend --no-edit
+
+[init]
+    defaultBranch = main

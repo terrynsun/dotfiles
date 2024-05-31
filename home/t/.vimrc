@@ -54,8 +54,13 @@ if has('nvim')
   Plug 'nvim-lua/popup.nvim' " todo what is this for?
   Plug 'nvim-telescope/telescope.nvim'
 
+  Plug 'kosayoda/nvim-lightbulb'
+
   nnoremap <C-p> <cmd>Telescope find_files<cr>
   nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+
+  autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+  set updatetime=500
 else
   Plug 'ctrlpvim/ctrlp.vim'
 
@@ -121,8 +126,8 @@ end
 Plug 'vim-scripts/a.vim'
 
 Plug 'pangloss/vim-javascript'
-"Plug 'wookiehangover/jshint.vim'
-"let JSHintUpdateWriteOnly=1
+Plug 'leafgarland/typescript-vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 
 Plug 'rust-lang/rust.vim'
 
@@ -156,7 +161,6 @@ Plug 'tpope/vim-rails'
 Plug 'uarun/vim-protobuf'
 Plug 'cstrahan/vim-capnp'
 
-Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-jsonnet'
 Plug 'pearofducks/ansible-vim'
 
@@ -216,16 +220,21 @@ lua << EOF
     buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', '<leader>t', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
     buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     buf_set_keymap('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
+
+    buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
   end
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'rust_analyzer', 'gopls', 'solargraph' }
+  local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'tsserver'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,

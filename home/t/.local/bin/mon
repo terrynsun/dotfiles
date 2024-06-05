@@ -1,13 +1,13 @@
 #!/bin/bash
 
-SCREEN_NAME="Wacom HID 48EB Finger"
+TOUCHSCREEN_INPUT="Wacom HID 48EB Finger touch"
 
 function get_id {
     echo $(xinput --list | grep "$1" | grep -Eo "id=([0-9]+)" | cut -d= -f2)
 }
 
 function map_screen {
-    xinput --map-to-output "${SCREEN_NAME}" eDP1
+    xinput --map-to-output "${TOUCHSCREEN_INPUT}" eDP1
 }
 
 function touchscreen {
@@ -17,17 +17,7 @@ function touchscreen {
     elif [[ $1 == "on" ]]; then
         verb=enable
     fi
-    xinput --$verb $screen_id
-}
-
-function external_monitor {
-    if [[ $1 == "off" ]]; then
-        xrandr --output HDMI2 --off
-    elif [[ $1 == "right" ]]; then
-        xrandr --output HDMI2 --auto --right-of eDP1
-    elif [[ $1 == "left" ]]; then
-        xrandr --output HDMI2 --auto --left-of eDP1
-    fi
+    xinput --$verb "$screen_id"
 }
 
 function rotate {
@@ -42,20 +32,14 @@ function rotate {
         mtx="0 -1 1 1 0 0 0 0 1"
     fi
     xrandr -o $1
-    xinput set-prop "${SCREEN_NAME}" "Coordinate Transformation Matrix" $mtx
-    ~/.local/bin/wallpaper
+    xinput set-prop "${TOUCHSCREEN_INPUT}" "Coordinate Transformation Matrix" $mtx
 }
 
-# xinput disable $(ID)
-if [[ $1 = "monitor" && $2 ]]; then
-    external_monitor $2
-    map_screen
-elif [[ $1 = "rotate" ]]; then
+if [[ $1 = "rotate" ]]; then
     rotate $2
 elif [[ $1 = "screen" ]]; then
     touchscreen $2
-elif [[ $1 = "setup" ]]; then
-    map_screen
-else
-    echo "invalid option."
 fi
+
+xrandr --output eDP1 --scale 1.5x1.5
+map_screen

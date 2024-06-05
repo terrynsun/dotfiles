@@ -13,4 +13,6 @@ i3-msg '[workspace="0"]' move workspace to output eDP1
 i3-msg '[class="Google-chrome"]' focus
 i3-msg '[class="Firefox"]' focus
 
+mon
+
 polybar-multi

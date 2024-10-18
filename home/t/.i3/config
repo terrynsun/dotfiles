@@ -120,6 +120,7 @@ bindsym XF86MonBrightnessUp   exec "backlight +"
 
 # change output monitor of workspace
 bindsym $mod+m move workspace to output left
+bindsym $mod+comma move workspace to output right
 
 # rotate screen and pen/screen inputs
 bindsym $mod+Control+Left  exec "mon rotate left"

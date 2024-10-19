@@ -5,7 +5,10 @@ if [[ $STATUS == "Playing" ]]; then
     SONG=$(playerctl metadata \
         | grep --color=never 'title' \
         | sed -E 's/.*title +//')
-    echo $SONG
+    ARTIST=$(playerctl metadata \
+        | grep --color=never 'artist' \
+        | sed -E 's/.*artist +//')
+    echo $SONG [$ARTIST]
 else
     echo $STATUS
 fi

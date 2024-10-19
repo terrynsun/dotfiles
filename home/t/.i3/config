@@ -108,13 +108,16 @@ bindsym $mod+r mode "resize"
 
 ################################ Custom Action #################################
 
-# bind mixer volume keys
-bindsym XF86AudioMute        exec "pamixer --toggle-mute && killall -USR1 conky"
-bindsym XF86AudioRaiseVolume exec "pamixer -i 5 && killall -USR1 conky"
-bindsym XF86AudioLowerVolume exec "pamixer -d 5 && killall -USR1 conky"
+# media keys
+bindsym XF86AudioMute        exec "pamixer --toggle-mute"
+bindsym XF86AudioRaiseVolume exec "pamixer -i 5"
+bindsym XF86AudioLowerVolume exec "pamixer -d 5"
 bindsym XF86AudioMicMute     exec "pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo toggle"
+bindsym XF86AudioPlay        exec "playerctl play-pause"
+bindsym XF86AudioNext        exec "playerctl next"
+bindsym XF86AudioPrev        exec "playerctl previous"
 
-# bind brightness keys
+# brightness keys
 bindsym XF86MonBrightnessDown exec "backlight -"
 bindsym XF86MonBrightnessUp   exec "backlight +"
 
@@ -122,13 +125,13 @@ bindsym XF86MonBrightnessUp   exec "backlight +"
 bindsym $mod+m move workspace to output left
 bindsym $mod+comma move workspace to output right
 
+bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
+
 # rotate screen and pen/screen inputs
 bindsym $mod+Control+Left  exec "mon rotate left"
 bindsym $mod+Control+Right exec "mon rotate right"
 bindsym $mod+Control+Up    exec "mon rotate normal"
 bindsym $mod+Control+Down  exec "mon rotate inverted"
-
-bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
 
 # quick change to last workspace
 workspace_auto_back_and_forth yes

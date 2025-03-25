@@ -10,10 +10,10 @@ if [[ $STATUS == "Playing" ]]; then
         | sed -E 's/.*artist +//')
 
     if [[ $ARTIST ]]; then
-        echo $SONG [$ARTIST]
+        echo "$SONG [$ARTIST]"
     else
-        echo $SONG
+        echo "$SONG"
     fi
 else
-    echo $STATUS
+    echo "$STATUS"
 fi

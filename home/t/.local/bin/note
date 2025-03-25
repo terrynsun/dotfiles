@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd ~/notes
-DATE=$(date +%m-%d)
-if [ $# == 1 ]; then
-    nvim ${DATE}-${1}.md
-else
-    nvim ${DATE}.md
-fi

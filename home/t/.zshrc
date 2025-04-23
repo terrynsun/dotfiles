@@ -45,8 +45,7 @@ if [ -f $HOME/.aliases ]; then
   source $HOME/.aliases
 fi
 
-### Set path
-export PATH=$PATH:$HOME/.local/bin
+# Set path (also inherits ~/.profile, which is needed for i3/dmenu to work)
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/bin/core_perl
 export PATH=$PATH:$HOME/.cargo/bin
@@ -58,7 +57,7 @@ if [ -f ~/.dir_colors/dircolors ]; then
   eval `dircolors ~/.dir_colors/dircolors`
 fi
 
-### Auto-open tmux
+# Auto-open tmux
 if [[ -z $TMUX ]] ; then
   if [[ -z $(tmux list-sessions | grep main) ]] ; then
     tmux new-session -s main

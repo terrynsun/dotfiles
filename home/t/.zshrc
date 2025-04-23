@@ -6,6 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(z sudo zsh-syntax-highlighting)
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle ':omz:update' frequency 0
 
 # Activate plugins
 source $ZSH/oh-my-zsh.sh

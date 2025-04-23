@@ -82,8 +82,8 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-#bindsym $mod+Shift+e exit
-bindsym $mod+Shift+e exec mate-session-save --logout-dialog
+bindsym $mod+Shift+e exit
+#bindsym $mod+Shift+e exec mate-session-save --logout-dialog
 
 bindsym $mod+Shift+s exec sshot
 
@@ -151,6 +151,7 @@ client.unfocused        #2aa198 #93a1a1 #fdf6e3 #292d2e
 
 # On startup
 exec keepassxc
+exec ~/.xinitrc
 
 assign [class="KeePassXC"] 10
 assign [class="Pavucontrol"] 10

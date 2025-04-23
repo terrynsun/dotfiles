@@ -229,7 +229,7 @@ lua << EOF
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'ts_ls'}
+  local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'ts_ls', 'pyright' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
@@ -347,7 +347,7 @@ autocmd BufEnter *.json set conceallevel=0
 " LaTeX
 " compile on save
 "autocmd BufWritePost *.tex !pdflatex "<afile>"
-"autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
 "autocmd VimLeave *.tex !rm *.log *.aux
 
 au FileType tex nnoremap j gj
@@ -358,7 +358,6 @@ autocmd BufEnter *.tex set tw=100 cc=100
 
 map <F2> :Git blame<CR>
 map <F3> :UndotreeToggle<CR>
-set pastetoggle=<F4>
 map <F5> :!reset<CR><CR>
 
 inoremap <F9> <C-O>za

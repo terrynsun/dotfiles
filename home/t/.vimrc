@@ -14,9 +14,8 @@ call plug#begin()
 "---------------------
 " Navigation & Display
 "---------------------
-" Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/vim-solarized8'
-" Plug 'overcache/NeoSolarized'
+Plug 'lifepillar/vim-solarized8', { 'branch': 'neovim' }
+
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -325,8 +324,9 @@ endif
 
 syntax enable
 set background=light
-set termguicolors " truecolor suport
 colorscheme solarized8
+" Fix lightline color https://github.com/vim-airline/vim-airline/issues/2693
+hi statusline cterm=NONE gui=NONE
 
 highlight SignColumn      ctermbg=none
 highlight GitGutterAdd    ctermbg=none

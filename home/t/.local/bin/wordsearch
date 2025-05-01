@@ -1,0 +1,3 @@
+#!/bin/sh
+
+~/crosswords/wordsearch/main.py ~/crosswords/data/wordlist

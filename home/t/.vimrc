@@ -11,6 +11,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
+
 "---------------------
 " Navigation & Display
 "---------------------
@@ -75,7 +76,7 @@ endif
 Plug 'mbbill/undotree'
 let g:undotree_HighlightChangedText = 0
 
-" <F12>
+" <F8>
 Plug 'scrooloose/nerdtree'
 
 "------------
@@ -206,38 +207,20 @@ lua << EOF
     }
   }
 
-  local nvim_lsp = require('lspconfig')
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.keymap.set('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.keymap.set('n', '<leader>t', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
-  local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  vim.keymap.set('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.keymap.set('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.keymap.set('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+  vim.keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.keymap.set('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
 
-    -- Mappings.
-    local opts = { noremap=true, silent=true }
-
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>t', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-
-    buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
-    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
-  end
-
-  -- Use a loop to conveniently call 'setup' on multiple servers and
-  -- map buffer local keybindings when the language server attaches
-  local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'ts_ls', 'pyright' }
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      flags = {
-        debounce_text_changes = 150,
-      }
-    }
-  end
+  local servers = { 'rust_analyzer', 'gopls', 'ts_ls', 'pyright' }
+  vim.lsp.enable(servers)
 
   require("trouble").setup {
     icons = false,
@@ -347,7 +330,7 @@ autocmd BufEnter *.json set conceallevel=0
 " LaTeX
 " compile on save
 "autocmd BufWritePost *.tex !pdflatex "<afile>"
-autocmd BufWritePost *.tex !pdflatex -interaction=nonstopmode -halt-on-error "<afile>"
+autocmd BufWritePost *.tex !xelatex -interaction=nonstopmode -halt-on-error "<afile>"
 "autocmd VimLeave *.tex !rm *.log *.aux
 
 au FileType tex nnoremap j gj
@@ -365,7 +348,7 @@ nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
-map <F12> :NERDTreeToggle<CR>
+map <F8> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""" Commands """"""""""""""""""""""""""""""""""
 command W w

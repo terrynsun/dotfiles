@@ -16,6 +16,8 @@ CASE_SENSITIVE="false"
 
 # No incremental append for history
 unsetopt INC_APPEND_HISTORY
+# ohmyzsh has a separate setting...?
+unsetopt share_history
 
 # Autocompletion
 autoload -U compinit

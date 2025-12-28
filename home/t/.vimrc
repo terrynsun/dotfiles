@@ -50,9 +50,10 @@ function! LightlineRepoPath()
 endfunction
 
 if has('nvim')
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-lua/popup.nvim' " todo what is this for?
+  Plug 'nvim-lua/plenary.nvim' " telescope dep
+  Plug 'nvim-lua/popup.nvim'   " todo what is this for?
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim'
 
   Plug 'kosayoda/nvim-lightbulb'
 
@@ -217,10 +218,35 @@ lua << EOF
   vim.keymap.set('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.keymap.set('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   vim.keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.keymap.set('n', '<leader>T', '<cmd>TroubleToggle<CR>', opts)
 
-  local servers = { 'rust_analyzer', 'gopls', 'ts_ls', 'pyright' }
-  vim.lsp.enable(servers)
+  local telescope_builtins = require('telescope.builtin')
+  vim.keymap.set('n', '<leader>e', function() telescope_builtins.diagnostics({ buffer = 0}) end )
+
+  -- For all language servers: apply the same settings and keymap
+  -- local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'ts_ls', 'pyright' }
+  local servers = { 'rust_analyzer', 'gopls', 'ts_ls', 'pylsp' }
+  for _, lsp in ipairs(servers) do
+    vim.lsp.enable(lsp)
+    vim.lsp.config(lsp, {
+      capabilities = capabilities
+    })
+  end
+
+  vim.lsp.config('pylsp', {
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'E302', 'E305'},
+            maxLineLength = 80,
+          },
+          rope_autoimport = {
+            enabled = true,
+          },
+        }
+      }
+    }
+  })
 
   require("trouble").setup {
     icons = false,

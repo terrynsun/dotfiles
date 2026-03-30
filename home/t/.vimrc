@@ -109,14 +109,26 @@ Plug 'triglav/vim-visual-increment'
 "------------
 " Syntax
 "------------
-Plug 'ervandew/supertab'
-
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
   Plug 'kosayoda/nvim-lightbulb'
 
-  "Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
+  " installed ttf-ubuntu-mono-nerd
   Plug 'folke/trouble.nvim'
+
+
+  " nvim-cmp and its many dependencies
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+
+  " For vsnip users.
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
 end
 
 "-------------------
@@ -208,6 +220,91 @@ lua << EOF
     }
   }
 
+  local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
+  local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+  end
+
+  -- Set up nvim-cmp.
+  local cmp = require('cmp')
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      end,
+    },
+
+    view = {
+      entries = { name = 'custom', selection_order = 'near_cursor' }
+    },
+
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+
+    completion = {
+      autocomplete = false,
+    },
+
+    mapping = cmp.mapping.preset.insert({
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          else
+            cmp.select_next_item()
+          end
+        -- elseif vim.fn["vsnip#available"](1) == 1 then
+          -- feedkey("<Plug>(vsnip-expand-or-jump)", "")
+        elseif has_words_before() then
+          cmp.complete()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          end
+        else
+          fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+        end
+      end, { "i", "s" }),
+
+      ["<S-Tab>"] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+          feedkey("<Plug>(vsnip-jump-prev)", "")
+        end
+      end, { "i", "s" }),ru
+    }),
+
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      -- { name = 'vsnip' }, -- For vsnip users.
+    }, {
+      { name = 'buffer' },
+    }),
+
+    enabled = function()
+      local disabled = false
+      disabled = disabled or (vim.api.nvim_get_option_value('buftype', { buf = 0 }) == 'prompt')
+      disabled = disabled or (vim.fn.reg_recording() ~= '')
+      disabled = disabled or (vim.fn.reg_executing() ~= '')
+      disabled = disabled or require('cmp.config.context').in_treesitter_capture('comment')
+      return not disabled
+    end,
+  })
+
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.keymap.set('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -219,12 +316,11 @@ lua << EOF
   vim.keymap.set('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   vim.keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
-  local telescope_builtins = require('telescope.builtin')
-  vim.keymap.set('n', '<leader>e', function() telescope_builtins.diagnostics({ buffer = 0}) end )
+  vim.keymap.set('n', '<leader>e', "<cmd>Trouble diagnostics toggle<cr>")
 
   -- For all language servers: apply the same settings and keymap
   -- local servers = { 'rust_analyzer', 'gopls', 'solargraph', 'ts_ls', 'pyright' }
-  local servers = { 'rust_analyzer', 'gopls', 'ts_ls', 'pylsp' }
+  local servers = { 'rust_analyzer', 'gopls', 'ts_ls', 'basedpyright' }
   for _, lsp in ipairs(servers) do
     vim.lsp.enable(lsp)
     vim.lsp.config(lsp, {
@@ -232,12 +328,18 @@ lua << EOF
     })
   end
 
+  vim.lsp.config('pyright', {
+    settings = {
+      pythonversion = 3.13
+    }
+  })
+
   vim.lsp.config('pylsp', {
     settings = {
       pylsp = {
         plugins = {
           pycodestyle = {
-            ignore = {'E302', 'E305'},
+            ignore = {'E113', 'E501', 'E302', 'E305'},
             maxLineLength = 80,
           },
           rope_autoimport = {
@@ -247,23 +349,6 @@ lua << EOF
       }
     }
   })
-
-  require("trouble").setup {
-    icons = false,
-    fold_open = "v", -- icon used for open folds
-    fold_closed = ">", -- icon used for closed folds
-    indent_lines = false, -- add an indent guide below the fold icons
-    signs = {
-        -- icons / text used for a diagnostic
-        error = "error",
-        warning = "warn",
-        hint = "hint",
-        information = "info"
-    },
-    use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
-    auto_preview = false,
-    auto_jump = { }
-  }
 EOF
 end
 
@@ -352,6 +437,7 @@ autocmd BufEnter,BufNewFile *.rs set cc=101
 autocmd BufEnter *.tex set conceallevel=0
 autocmd BufEnter *.md set conceallevel=0
 autocmd BufEnter *.json set conceallevel=0
+autocmd BufEnter Dockerfile set conceallevel=0
 
 " LaTeX
 " compile on save

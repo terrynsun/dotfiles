@@ -24,12 +24,10 @@ if [ ! -d gnome-terminal-colors-solarized ]; then
 fi
 
 # Auto-install script
-cd gnome-terminal-colors-solarized
-echo "3
-1
-YES" | ./install.sh
-cd ..
-rm -rf gnome-terminal-colors-solarized
+profile=$(gsettings get org.gnome.Terminal.ProfilesList list | tr -d "[]\',")
+echo $profile
+gnome-terminal-colors-solarized/install.sh -s light -p $profile
+exit
 
 # Symlink all dotfiles
 echo symlinking dotfiles...

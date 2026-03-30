@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nvim ~/crosswords/gh/wordlist/Ingrid.dict

@@ -49,10 +49,6 @@ if [ -f $HOME/.aliases ]; then
 fi
 
 # Set path (also inherits ~/.profile, which is needed for i3/dmenu to work)
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.cargo/bin
-
 export EDITOR=nvim
 
 # Dircolors from gnome-terminal-colors-solarized

@@ -44,4 +44,4 @@ cd ..
 # Entire scripts directory gets symlinked back to this repo (so I don't have to
 # link when writing new scripts).
 rm $HOME/.local/bin
-ln -s localbin $HOME/.local/bin
+ln -s $(pwd)/localbin $HOME/.local/bin

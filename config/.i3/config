@@ -93,17 +93,17 @@ bindsym $mod+Shift+s exec sshot
 #     bindsym k       resize grow height 10 px or 10 ppt
 #     bindsym l       resize shrink height 10 px or 10 ppt
 #     bindsym semicolon   resize grow width 10 px or 10 ppt
-# 
+#
 #     bindsym Left    resize shrink width 10 px or 10 ppt
 #     bindsym Down    resize grow height 10 px or 10 ppt
 #     bindsym Up      resize shrink height 10 px or 10 ppt
 #     bindsym Right   resize grow width 10 px or 10 ppt
-# 
+#
 #     # back to normal: Enter or Escape
 #     bindsym Return mode "default"
 #     bindsym Escape mode "default"
 # }
-# 
+#
 # bindsym $mod+r mode "resize"
 
 ################################ Custom Action #################################
@@ -122,8 +122,8 @@ bindsym XF86MonBrightnessDown exec "backlight -"
 bindsym XF86MonBrightnessUp   exec "backlight +"
 
 # change output monitor of workspace
-bindsym $mod+m move workspace to output left
-bindsym $mod+comma move workspace to output right
+bindsym $mod+m move workspace to output left; focus output right
+bindsym $mod+comma move workspace to output right; focus output right
 
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename: '
 
@@ -142,12 +142,12 @@ bindsym $mod+Control+l exec "i3lock"
 ################################ Color & Style #################################
 
 # class                 border  backgr. text    indicator
-#                               cyan    base3
-client.focused          #2aa198 #2aa198 #fdf6e3 #2e9ef4
-#                               blue    base3
-client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
-#                               base01  base3
-client.unfocused        #2aa198 #93a1a1 #fdf6e3 #292d2e
+#                       cyan    cyan    base3   cyan
+client.focused          #2aa198 #2aa198 #fdf6e3 #2aa198
+#                       blue    base01  base3   base01
+client.focused_inactive #268bd2 #6e9996 #fdf6e3 #93a1a1
+#                       blue    base01  base3
+client.unfocused        #268bd2 #93a1a1 #fdf6e3 #93a1a1
 
 # On startup
 exec keepassxc

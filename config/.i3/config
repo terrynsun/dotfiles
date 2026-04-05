@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font pango:DejaVu Sans 9
+font pango:DejaVu Sans 11
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -82,7 +82,7 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-#bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 #bindsym $mod+Shift+e exec mate-session-save --logout-dialog
 
 bindsym $mod+Shift+s exec sshot
@@ -139,15 +139,27 @@ bindsym $mod+Tab workspace back_and_forth
 
 # lock computer
 bindsym $mod+Control+l exec "i3lock"
+
 ################################ Color & Style #################################
 
-# class                 border  backgr. text    indicator
-#                       cyan    cyan    base3   cyan
-client.focused          #2aa198 #2aa198 #fdf6e3 #2aa198
-#                       blue    base01  base3   base01
-client.focused_inactive #268bd2 #6e9996 #fdf6e3 #93a1a1
-#                       blue    base01  base3
-client.unfocused        #268bd2 #93a1a1 #fdf6e3 #93a1a1
+set $red #dc322f
+set $green #859900
+set $cyan #2aa198
+set $lightcyan #6e9996
+
+# grey
+set $base0 #839496
+set $base1 #93a1a1
+
+# light pales
+set $base2 #eee8d5
+set $base3 #fdf6e3
+
+# class                 border  backgr.    text    indicator
+client.focused          $base0  $green     $base3 $base1
+client.focused_inactive $base0  $lightcyan $base3 $base1
+client.unfocused        $base0  $base1     $base3 $base1
+client.urgent           $red    $red       $base3 $base1
 
 # On startup
 exec keepassxc
